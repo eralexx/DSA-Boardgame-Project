@@ -8,7 +8,12 @@ public class User {
     private String UserName;
     private String Email;
     private String Password;
+    private int Nivel;
+    private int Ataque;
+    private int Defensa;
+    private int Vida;
     private List<Item> Items;
+
 
     //End of Attributes
     //Start of Getters And Setters
@@ -25,6 +30,19 @@ public class User {
     public  String GetPassword(){
         return this.Password;
     }
+    public  int GetNivel(){
+        return this.Nivel;
+    }
+    public  int GetAtaque(){
+        return this.Ataque;
+    }
+    public  int GetDefensa(){
+        return this.Defensa;
+    }
+    public  int GetVida(){
+        return this.Vida;
+    }
+
     public  List<Item> GetItems(){
         return this.Items;
     }
@@ -36,6 +54,18 @@ public class User {
     }
     public void SetEmail(String Password){
         this.Password= Password;
+    }
+    public void SetNivel(int Nivel){
+        this.Nivel= Nivel;
+    }
+    public void SetAtaque(int Ataque){
+        this.Ataque= Ataque;
+    }
+    public void SetDefensa(int Defensa){
+        this.Defensa= Defensa;
+    }
+    public void SetVida(int Vida){
+        this.Vida= Vida;
     }
     public void SetPassword( List<Item> Items){
         this.Items= Items;
