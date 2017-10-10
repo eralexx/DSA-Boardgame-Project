@@ -4,8 +4,4 @@
 
 <web-app>
   <display-name>Archetype Created Web Application</display-name>
-  <servlet>
-    <servlet-name>index</servlet-name>
-    <jsp-file>WebAppDSA\src\main\webapp\index.jsp</jsp-file>
-  </servlet>
 </web-app>
