@@ -50,4 +50,7 @@ $(function () {
         var message = $("#input").val();
         ExecuteRestQuery(serverURL+"AddMessage?message="+message);
     });
+    $( "#back-btn" ).click(function() {
+        window.location.href="http://localhost:63342/SetUpGitHub-master/WebAppDSA/src/Game/GameWindow.html";
+    });
 });
