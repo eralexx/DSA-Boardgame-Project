@@ -1,5 +1,5 @@
 $(function () {
-    var serverURL="http://localhost:63342/";
+    var serverURL="http://localhost:8080/rest/";
 
     var loopFunction = function() {
         GetNewMessages()
@@ -14,7 +14,7 @@ $(function () {
 
     function GetNewMessages(){
         var defer = $.Deferred();
-        ExecuteRestQuery(serverURL+"GetChatMessages")
+        ExecuteRestQuery(serverURL+"Chat/GetChatMessages")
             .then(function(data){
                 defer.resolve(data);
             });

@@ -1,15 +1,15 @@
 $(function () {
-    var serverURL="http://localhost:63342/";
+    var serverURL="http://localhost:8080/rest/";
     $( "#login-btn" ).click(function() {
         var email = $("#email").val();
         var password = $("#password").val();
-        ExecuteRestQuery(serverURL+"Login/"+email+":"+password);
+        ExecuteRestQuery(serverURL+"UserManagement/"+email+"/"+password);
     });
 
     $( "#register-btn" ).click(function() {
         var email = $("#email").val();
         var password = $("#password").val();
-        ExecuteRestQuery(serverURL+"Register/"+email+":"+password);
+        ExecuteRestQuery(serverURL+"UserManagement/Register/"+email+"/"+password);
     });
 
     function ExecuteRestQuery(url) {
