@@ -1,3 +1,5 @@
+package WebApp.DSA;
+
 public class Cell {
 
     private int CellType;

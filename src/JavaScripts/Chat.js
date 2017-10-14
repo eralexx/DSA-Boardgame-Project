@@ -1,5 +1,5 @@
 $(function () {
-    var serverURL="http://localhost:63342/";
+    var serverURL="http://localhost:8080/rest/";
 
     var loopFunction = function() {
         GetNewMessages()
@@ -14,7 +14,7 @@ $(function () {
 
     function GetNewMessages(){
         var defer = $.Deferred();
-        ExecuteRestQuery(serverURL+"GetChatMessages")
+        ExecuteRestQuery(serverURL+"Chat/GetChatMessages")
             .then(function(data){
                 defer.resolve(data);
             });
@@ -49,5 +49,8 @@ $(function () {
     $( "#send-btn" ).click(function() {
         var message = $("#input").val();
         ExecuteRestQuery(serverURL+"AddMessage?message="+message);
+    });
+    $( "#back-btn" ).click(function() {
+        window.location.href="http://localhost:63342/SetUpGitHub-master/WebAppDSA/src/Game/GameWindow.html";
     });
 });
