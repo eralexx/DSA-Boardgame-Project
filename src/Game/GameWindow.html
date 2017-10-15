@@ -1,8 +1,13 @@
 <head>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+
     <script  src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
 
     <script src="../JavaScripts/BoardGame.js"></script>
     <script src="../JavaScripts/Game.js"></script>
@@ -23,8 +28,23 @@
         <br>
         <span id="player-name">Alex</span><br><br>
         <span id="player-level">Level 200</span><br><br>
-        <span id="player-description">Here goes a brief description of yourself.</span><br>
+        <div id="items">
+            <ul class="collection">
+                <li class="collection-item item-card">
+                    <i class="material-icons circle">folder</i>
+                    <span class="title">Item 1</span>
+                </li>
+                <li class="collection-item item-card">
+                    <i class="material-icons circle green">insert_chart</i>
+                    <span class="title">Item 2</span>
+                </li>
+                <li class="collection-item item-card">
+                    <i class="material-icons circle red">play_arrow</i>
+                    <span class="title">Item 3</span>
+                </li>
+            </ul>
 
+        </div>
 
     </div>
 </div>
@@ -35,6 +55,13 @@
 <br>
 <br>
 <br>
-<footer align="center">
-    Game designed, developed and distributed by Alex Gonzalez Jucla. - October 2017
+<br>
+<br>
+<footer class="page-footer">
+    <div class="container">
+        <div class="row">
+            Game designed, developed and distributed by Alex Gonzalez Jucla. - ©  October 2017
+            <a class="grey-text text-lighten-4 right" href="https://github.com/eralexx/SetUpGitHub">Source Code - GitHub</a>
+        </div>
+    </div>
 </footer>
