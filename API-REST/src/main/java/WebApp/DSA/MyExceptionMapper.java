@@ -1,9 +1,10 @@
 package WebApp.DSA;
 
+import org.glassfish.grizzly.utils.Exceptions;
+
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
 import javax.ws.rs.ext.Provider;
-import org.glassfish.grizzly.utils.Exceptions;
 
 @Provider
 public class MyExceptionMapper implements ExceptionMapper<Exception> {

@@ -3,10 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/API-REST/API-REST.iml" filepath="$PROJECT_DIR$/API-REST/API-REST.iml" />
-      <module fileurl="file://$PROJECT_DIR$/Board/Board.iml" filepath="$PROJECT_DIR$/Board/Board.iml" />
-      <module fileurl="file://$PROJECT_DIR$/Cell/Cell.iml" filepath="$PROJECT_DIR$/Cell/Cell.iml" />
-      <module fileurl="file://$PROJECT_DIR$/Item/Item.iml" filepath="$PROJECT_DIR$/Item/Item.iml" />
-      <module fileurl="file://$PROJECT_DIR$/User/User.iml" filepath="$PROJECT_DIR$/User/User.iml" />
       <module fileurl="file://$PROJECT_DIR$/WebAppDSA.iml" filepath="$PROJECT_DIR$/WebAppDSA.iml" />
     </modules>
   </component>

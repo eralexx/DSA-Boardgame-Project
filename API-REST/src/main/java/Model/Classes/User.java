@@ -1,3 +1,4 @@
+package Model.Classes;
 
 import java.util.List;
 
@@ -81,6 +82,11 @@ public class User {
         this.Email=Email;
         this.Password=Password;
         this.Items=Items;
+    }
+    public User(String UserName, String Email, String Password){
+        this.UserName=UserName;
+        this.Email=Email;
+        this.Password=Password;
     }
 
     //End of Constructors

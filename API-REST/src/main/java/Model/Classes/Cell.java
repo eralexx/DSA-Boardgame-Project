@@ -1,4 +1,4 @@
-package WebApp.DSA;
+package Model.Classes;
 
 public class Cell {
 

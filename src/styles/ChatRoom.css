@@ -14,13 +14,12 @@
 
 #input{
     background-color: rgba(176, 255, 252, 0.26);
-    width: 1050px;
+    width: 900px;
     padding: 10px;
     display: inline-block;
 
 }
 #send-btn{
-
     display: inline-block;
 }
 #back-btn{

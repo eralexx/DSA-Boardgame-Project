@@ -1,7 +1,6 @@
-import WebApp.DSA.Cell;
+package Model.Classes;
 
 import java.util.List;
-import java.util.Map;
 
 public class Board {
 

@@ -1,3 +1,5 @@
+package Model.Classes;
+
 public class Item {
 
     //Start of Attributes

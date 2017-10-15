@@ -1,41 +1,83 @@
 package WebApp.DSA;
 
-import javax.ws.rs.*;
+import Model.Classes.User;
+import Model.Classes.UserLists;
+
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-import java.util.ArrayList;
 import java.util.List;
+
+
 @Path("/UserManagement")
 public class UserManagement {
 
+    UserLists lists;
+
+    //Endpoints Rest para el logeo, registro y control de sesion de los users
     @GET
-    @Path("/Register;{Email}:{Username};{Password}")
+    @Path("/Register?{Email}:{Username};{Password}")
     @Produces(MediaType.TEXT_PLAIN)
-    public String getTrack(@PathParam("Email") String Email, @PathParam("Username") String Username,@PathParam("Email") String Password) {
+    public int getTrack(@PathParam("Email") String Email, @PathParam("Username") String Username,@PathParam("Email") String Password) {
         try {
 
-            //Check if user exists, if email is valid etc...
-
-            return "User Added to Database";
+            if (lists.IsRegisteredByEmail(Email)){
+                return -1;
+            }
+            else {
+                User newUser= new User(Email, Username, Password);
+                lists.AddRegisteredUser(newUser);
+                lists.IsRegisteredByEmail(newUser.GetEmail());
+                return 0;
+            }
         }
         catch(Exception ex){
-
-            return "Unable to add User to database.";
+            return -1;
         }
     }
 
     @GET
-    @Path("/Login")
-    @Produces(MediaType.TEXT_HTML)
-    public String Test() {
+    @Path("/GetRegisteredUsers")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<User> GetRegisteredUsers() {
         try {
-            return "Aqui deberia devolver el HTML del formulario";
+            return lists.getRegisteredUsers();
         }
         catch(Exception ex){
-
-            return "Unable to add User to database.";
+            return null;
         }
     }
+
+    @GET
+    @Path("/GetOnlineUsers")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<User> GetOnlineUsers() {
+        try {
+            return lists.getRegisteredUsers();
+        }
+        catch(Exception ex){
+            return null;
+        }
+    }
+    @GET
+    @Path("/Login?{EmailOrUsername};{Password}")
+    @Produces(MediaType.TEXT_HTML)
+    public int  Login(@PathParam("EmailOrUsername") String EmailOrUsername, @PathParam("Password") String Password) {
+        try {
+           if (lists.CheckLogin(EmailOrUsername, Password)) {
+               return 0;
+           }
+           else return -1;
+        }
+        catch(Exception ex)
+        {
+            return -1;
+        }
+    }
+
+
 
 
 
