@@ -17,9 +17,18 @@
 
 <body>
 <div class="btn-group btn-group-justified">
-    <a href="#" class="btn btn-primary">Menu</a>
-    <a href="#" class="btn btn-primary">Global Chat</a>
-    <a href="#" class="btn btn-primary">Exit / Logout</a>
+    <div class="btn-group">
+        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+            Menu<span class="caret"></span></button>
+        <ul class="dropdown-menu" role="menu">
+            <li><a href="#">Musica On / Off</a></li>
+            <li><a href="#">Profile</a></li>
+            <li><a href="#">Stats</a></li>
+            <li><a href="#">Find Game</a></li>
+        </ul>
+    </div>
+    <a href="#" id="chat-btn" class="btn btn-primary">Global Chat</a>
+    <a href="#" id="exit-btn" class="btn btn-primary">Exit / Logout</a>
 </div>
 <br>
 <div id="player">

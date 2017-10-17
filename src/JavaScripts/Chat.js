@@ -1,5 +1,6 @@
 $(function () {
     var serverURL="http://localhost:8080/rest/";
+    var localhost= window.location.href.split("src")[0]+"src";
 
     var loopFunction = function() {
         GetNewMessages()
@@ -7,7 +8,11 @@ $(function () {
             {
                 RefreshMessages(data);
             });
-    };
+    }; window.setInterval(loopFunction, 3000);
+    loopFunction();
+    $( "#back-btn" ).click(function() {
+        window.location.href= localhost+"/Game/GameWindow.html"
+    });
 
     window.setInterval(loopFunction, 3000);
     loopFunction();
@@ -50,7 +55,5 @@ $(function () {
         var message = $("#input").val();
         ExecuteRestQuery(serverURL+"AddMessage?message="+message);
     });
-    $( "#back-btn" ).click(function() {
-        window.location.href="http://localhost:63342/SetUpGitHub-master/WebAppDSA/src/Game/GameWindow.html";
-    });
+
 });
