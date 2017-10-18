@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserLists {
-    private List<User> RegisteredUsers = new ArrayList<User>();
-    private List<User> OnlineUsers = new ArrayList<User>();
+     List<User> RegisteredUsers = new ArrayList<User>();
+     List<User> OnlineUsers = new ArrayList<User>();
 
 
     public List<User> getRegisteredUsers(){
@@ -23,7 +23,7 @@ public class UserLists {
 
     public boolean IsRegisteredByEmail(String Email){
         for(int i=0; i<RegisteredUsers.size(); i++) {
-            if (RegisteredUsers.get(i).GetEmail()==Email){
+            if (RegisteredUsers.get(i).getEmail()==Email){
                 return true;
             }
         }
@@ -31,7 +31,7 @@ public class UserLists {
     }
     public boolean CheckLogin(String Email, String Password){
         for(int i=0; i<RegisteredUsers.size(); i++) {
-            if (RegisteredUsers.get(i).GetEmail()==Email && RegisteredUsers.get(i).GetPassword()==Password){
+            if (RegisteredUsers.get(i).getEmail()==Email && RegisteredUsers.get(i).getPassword()==Password){
                 return true;
             }
         }

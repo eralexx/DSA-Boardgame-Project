@@ -29,7 +29,7 @@ public class UserManagement {
             else {
                 User newUser= new User(Email, Username, Password);
                 lists.AddRegisteredUser(newUser);
-                lists.IsRegisteredByEmail(newUser.GetEmail());
+                lists.IsRegisteredByEmail(newUser.getEmail());
                 return 0;
             }
         }

@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="war" name="WebAppDSA:war">
-    <output-path>$PROJECT_DIR$/target</output-path>
-    <root id="archive" name="WebApp.DSA.war">
-      <element id="artifact" artifact-name="WebAppDSA:war exploded" />
-    </root>
-  </artifact>
-</component>

@@ -4,9 +4,9 @@ import java.util.List;
 
 public class Board {
 
-    private int Id;
-    private int Difficulty;
-    private List<User> Users;
-    private List<Cell> Cells;
+     int Id;
+     int Difficulty;
+     List<User> Users;
+     List<Cell> Cells;
 }
 

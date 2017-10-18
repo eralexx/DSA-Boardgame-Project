@@ -1,5 +1,9 @@
 package WebApp.DSA;
 
+import Model.Classes.Chat;
+import Model.Classes.Message;
+import Model.Classes.User;
+
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -10,8 +14,10 @@ import java.util.List;
 public class JSONService {
 
     protected List<Track> tracks;
+    protected Chat chat;
 
     public JSONService() {
+        chat= new Chat();
         tracks = new ArrayList<>();
 
         Track t1 = new Track();
@@ -23,6 +29,12 @@ public class JSONService {
         t2.setTitle("La Barbacoa");
         t2.setSinger("Georgie Dann");
         tracks.add(t2);
+        chat = new Chat();
+        User newUser = new User("admin", "admin@gmail.com", "admin");
+        Message newMessage1 = new Message("hello world1", newUser);
+        Message newMessage2 = new Message("hello world2", newUser);
+        chat.AddMessage(newMessage1);
+        chat.AddMessage(newMessage2);
     }
 
     @GET
@@ -42,7 +54,6 @@ public class JSONService {
         track.setSinger("Metallica");
 
         return track;
-
     }
 
     @POST

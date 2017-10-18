@@ -6,61 +6,61 @@ public class User {
 
     //Start of Attributes
 
-    private int Id;
-    private String UserName;
-    private String Email;
-    private String Password;
-    private int Nivel;
-    private int Ataque;
-    private int Defensa;
-    private int Vida;
-    private List<Item> Items;
+     int Id;
+     String UserName;
+     String Email;
+     String Password;
+     int Nivel;
+     int Ataque;
+     int Defensa;
+     int Vida;
+     List<Item> Items;
 
 
     //End of Attributes
     //Start of Getters And Setters
 
-    public  int GetId(){
+    public  int getIdetId(){
         return this.Id;
     }
-    public  String GetUserName(){
+    public  String getetUserName(){
         return this.UserName;
     }
-    public  String GetEmail(){
+    public  String getEmail(){
         return this.Email;
     }
-    public  String GetPassword(){
+    public  String getPassword(){
         return this.Password;
     }
-    public  int GetNivel(){
+    public  int getNivel(){
         return this.Nivel;
     }
-    public  int GetAtaque(){
+    public  int getAtaque(){
         return this.Ataque;
     }
-    public  int GetDefensa(){
+    public  int getDefensa(){
         return this.Defensa;
     }
-    public  int GetVida(){
+    public  int getVida(){
         return this.Vida;
     }
 
-    public  List<Item> GetItems(){
+    public  List<Item> getItems(){
         return this.Items;
     }
-    public void SetId(int Id){
+    public void setId(int Id){
         this.Id= Id;
     }
-    public void SetUserName(String UserName){
+    public void setUserName(String UserName){
         this.UserName= UserName;
     }
-    public void SetEmail(String Password){
+    public void setEmail(String Password){
         this.Password= Password;
     }
-    public void SetNivel(int Nivel){
+    public void setNivel(int Nivel){
         this.Nivel= Nivel;
     }
-    public void SetAtaque(int Ataque){
+    public void setAtaque(int Ataque){
         this.Ataque= Ataque;
     }
     public void SetDefensa(int Defensa){

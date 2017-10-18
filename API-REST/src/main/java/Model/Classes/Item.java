@@ -4,36 +4,36 @@ public class Item {
 
     //Start of Attributes
 
-    private int Id;
-    private String Name;
-    private String AttributeName;
-    private int AttributeValue;
+     int Id;
+     String Name;
+     String AttributeName;
+     int AttributeValue;
 
     //End of Attributes
     //Start of Getters And Setters
 
-    public  int GetId(){
+    public  int getId(){
       return this.Id;
     }
-    public  String GetName(){
+    public  String getName(){
         return this.Name;
     }
-    public  String GetAttributeName(){
+    public  String getAttributeName(){
         return this.AttributeName;
     }
-    public  int GetAttributeValue(){
+    public  int getAttributeValue(){
         return this.AttributeValue;
     }
-    public void SetId(int Id){
+    public void setId(int Id){
         this.Id= Id;
     }
-    public void SetName(String Name){
+    public void setName(String Name){
         this.Name= Name;
     }
-    public void SetAttributeName(String AttributeName){
+    public void setAttributeName(String AttributeName){
         this.AttributeName= AttributeName;
     }
-    public void SetAttributeValue( int AttributeValue){
+    public void setAttributeValue( int AttributeValue){
         this.AttributeValue= AttributeValue;
     }
 
