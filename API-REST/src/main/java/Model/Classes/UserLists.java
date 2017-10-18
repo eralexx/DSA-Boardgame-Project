@@ -8,6 +8,14 @@ public class UserLists {
      List<User> OnlineUsers = new ArrayList<User>();
 
 
+    public void setRegisteredUsers(List<User> registeredUsers) {
+        RegisteredUsers = registeredUsers;
+    }
+
+    public void setOnlineUsers(List<User> onlineUsers) {
+        OnlineUsers = onlineUsers;
+    }
+
     public List<User> getRegisteredUsers(){
         return this.RegisteredUsers;
     }

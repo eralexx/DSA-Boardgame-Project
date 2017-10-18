@@ -20,58 +20,78 @@ public class User {
     //End of Attributes
     //Start of Getters And Setters
 
-    public  int getIdetId(){
-        return this.Id;
-    }
-    public  String getetUserName(){
-        return this.UserName;
-    }
-    public  String getEmail(){
-        return this.Email;
-    }
-    public  String getPassword(){
-        return this.Password;
-    }
-    public  int getNivel(){
-        return this.Nivel;
-    }
-    public  int getAtaque(){
-        return this.Ataque;
-    }
-    public  int getDefensa(){
-        return this.Defensa;
-    }
-    public  int getVida(){
-        return this.Vida;
+    public int getId() {
+        return Id;
     }
 
-    public  List<Item> getItems(){
-        return this.Items;
+    public void setId(int id) {
+        Id = id;
     }
-    public void setId(int Id){
-        this.Id= Id;
+
+    public String getUserName() {
+        return UserName;
     }
-    public void setUserName(String UserName){
-        this.UserName= UserName;
+
+    public void setUserName(String userName) {
+        UserName = userName;
     }
-    public void setEmail(String Password){
-        this.Password= Password;
+
+    public String getEmail() {
+        return Email;
     }
-    public void setNivel(int Nivel){
-        this.Nivel= Nivel;
+
+    public void setEmail(String email) {
+        Email = email;
     }
-    public void setAtaque(int Ataque){
-        this.Ataque= Ataque;
+
+    public String getPassword() {
+        return Password;
     }
-    public void SetDefensa(int Defensa){
-        this.Defensa= Defensa;
+
+    public void setPassword(String password) {
+        Password = password;
     }
-    public void SetVida(int Vida){
-        this.Vida= Vida;
+
+    public int getNivel() {
+        return Nivel;
     }
-    public void SetPassword( List<Item> Items){
-        this.Items= Items;
+
+    public void setNivel(int nivel) {
+        Nivel = nivel;
     }
+
+    public int getAtaque() {
+        return Ataque;
+    }
+
+    public void setAtaque(int ataque) {
+        Ataque = ataque;
+    }
+
+    public int getDefensa() {
+        return Defensa;
+    }
+
+    public void setDefensa(int defensa) {
+        Defensa = defensa;
+    }
+
+    public int getVida() {
+        return Vida;
+    }
+
+    public void setVida(int vida) {
+        Vida = vida;
+    }
+
+    public List<Item> getItems() {
+        return Items;
+    }
+
+    public void setItems(List<Item> items) {
+        Items = items;
+    }
+
 
     //End of Getters And Setters
     //Start of Constructors

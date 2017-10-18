@@ -33,8 +33,8 @@ public class JSONService {
         User newUser = new User("admin", "admin@gmail.com", "admin");
         Message newMessage1 = new Message("hello world1", newUser);
         Message newMessage2 = new Message("hello world2", newUser);
-        chat.AddMessage(newMessage1);
-        chat.AddMessage(newMessage2);
+        chat.AddMessage(newMessage1.toString());
+        chat.AddMessage(newMessage2.toString());
     }
 
     @GET

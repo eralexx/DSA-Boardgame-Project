@@ -6,27 +6,42 @@ import java.time.format.DateTimeFormatter;
 public class Message {
      String Time;
      String Content;
-     User User;
+     String UserName;
 
-     public String getTime(){
-         return this.Time;
-
-     }
-    public String getContent(){
-        return this.Content;
-
-    }
-    public User getUser(){
-        return this.User;
-
+    public String getTime() {
+        return Time;
     }
 
+    public void setTime(String time) {
+        Time = time;
+    }
+
+    public String getContent() {
+        return Content;
+    }
+
+    public void setContent(String content) {
+        Content = content;
+    }
+
+    public String getUserName() {
+        return UserName;
+    }
+
+    public void setUserName(String userName) {
+        UserName = userName;
+    }
+
+    @Override
+    public String toString() {
+        return (this.Time + " "  + this.UserName+" > " + this.Content);
+    }
 
     public Message(String Content, User User) {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
         LocalDateTime localDate = LocalDateTime.now();
         this.Time = dtf.format(localDate);
         this.Content = Content;
-        this.User = User;
+        this.UserName = User.getUserName();
     }
 }

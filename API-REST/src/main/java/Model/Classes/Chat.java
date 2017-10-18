@@ -5,9 +5,9 @@ import java.util.List;
 
 public class Chat {
 
-    private List<Message> Messages = new ArrayList<Message>(20);
+    private List<String> Messages = new ArrayList<>(20);
 
-    public void AddMessage(Message NewMessage) {
+    public void AddMessage(String NewMessage) {
         try {
             if (NewMessage != null)
                 Messages.add(NewMessage);
@@ -15,14 +15,16 @@ public class Chat {
             throw ex;
         }
     }
-    public void setMessages(List<Message> Messages){
-        this.Messages= Messages;
-    }
-    public List<Message> getMessages(){
-            return this.Messages;
 
+    public List<String> getMessages() {
+        return Messages;
     }
-    private void ShiftRight(Message newMessage) {
+
+    public void setMessages(List<String> messages) {
+        Messages = messages;
+    }
+
+    private void ShiftRight(String newMessage) {
         try {
             for (int i = 19; i > 0; i--) {
                 if (Messages.get(i-1) !=null) {
@@ -36,9 +38,9 @@ public class Chat {
         }
     }
     @Override
+
     public String toString() {
         return "Chat [Messages=" + Messages+"]";
     }
-
 
 }

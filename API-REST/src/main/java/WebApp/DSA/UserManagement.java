@@ -3,10 +3,7 @@ package WebApp.DSA;
 import Model.Classes.User;
 import Model.Classes.UserLists;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
 
@@ -20,6 +17,7 @@ public class UserManagement {
     @GET
     @Path("/Register?{Email}:{Username};{Password}")
     @Produces(MediaType.TEXT_PLAIN)
+    @Consumes(MediaType.TEXT_PLAIN)
     public int getTrack(@PathParam("Email") String Email, @PathParam("Username") String Username,@PathParam("Email") String Password) {
         try {
 

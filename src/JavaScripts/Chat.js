@@ -1,6 +1,7 @@
 $(function () {
-    var serverURL="http://localhost:8080/rest/";
-    var localhost= window.location.href.split("src")[0]+"src";
+    var serverURL="http://localhost:8081/rest/";
+    var localhost= window.location.href.split("src")[0]+"src/";
+    var User = {};
 
     var loopFunction = function() {
         GetNewMessages()
@@ -10,8 +11,15 @@ $(function () {
             });
     }; window.setInterval(loopFunction, 3000);
     loopFunction();
+
     $( "#back-btn" ).click(function() {
-        window.location.href= localhost+"/Game/GameWindow.html"
+        window.location.href= localhost+"Game/GameWindow.html"
+    })
+
+    $( "#send-btn" ).click(function() {
+        var input = $("#input").val();
+        var userId = 0;
+        ExecuteRestQuery(serverURL+"ChatWindow/AddMessage?" + userId + ";" + input);
     });
 
     window.setInterval(loopFunction, 3000);
@@ -19,12 +27,14 @@ $(function () {
 
     function GetNewMessages(){
         var defer = $.Deferred();
-        ExecuteRestQuery(serverURL+"Chat/GetChatMessages")
+        ExecuteRestQuery(serverURL+"ChatWindow/GetAllMessages")
             .then(function(data){
                 defer.resolve(data);
             });
         return defer.promise();
     }
+
+
 
     function RefreshMessages(dataArray){
         for(var i=1; i<dataArray.length; i++){
@@ -50,10 +60,4 @@ $(function () {
         });
         return defer.promise();
     }
-
-    $( "#send-btn" ).click(function() {
-        var message = $("#input").val();
-        ExecuteRestQuery(serverURL+"AddMessage?message="+message);
-    });
-
 });
