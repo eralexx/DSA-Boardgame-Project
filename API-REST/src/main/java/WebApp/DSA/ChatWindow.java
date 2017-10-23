@@ -7,6 +7,7 @@ import Model.Classes.User;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 
 @Path("/ChatWindow")
@@ -34,9 +35,8 @@ public class ChatWindow {
 
     @GET
     @Path("/AddMessage/{userId}/{input}")
-    @Produces(MediaType.TEXT_PLAIN)
     @Consumes(MediaType.TEXT_PLAIN)
-    public void AddMessage(@PathParam("userId") int idUser ,@PathParam("input") String input) {
+    public Response AddMessage(@PathParam("userId") int idUser ,@PathParam("input") String input) {
         try {
             User user = new User("NullUser", "NullUser@gmail.com", "null");
             User nullUser = new User("NullUser", "NullUser@gmail.com", "null");
@@ -45,17 +45,26 @@ public class ChatWindow {
             }
             Message newMessage= new Message(input, user);
             Info.chatInfo.AddMessage(newMessage.toString());
+            return Response.ok() //200
+                .header("Access-Control-Allow-Origin", "*")
+                .header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
+                .allow("OPTIONS").build();
         }
         catch(Exception ex){
             throw ex;
         }
     }
+
     @GET
     @Path("/GetAllMessages")
     @Produces(MediaType.APPLICATION_JSON)
-    public Chat GetAllMessages() {
+    public Response GetAllMessages() {
         try {
-            return chat;
+            return Response.ok() //200
+                .entity(chat)
+                .header("Access-Control-Allow-Origin", "*")
+                .header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
+                .allow("OPTIONS").build();
         }
         catch(Exception ex){
             throw ex;

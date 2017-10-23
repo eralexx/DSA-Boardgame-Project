@@ -19,7 +19,8 @@ $(function () {
     $( "#send-btn" ).click(function() {
         var input = $("#input").val();
         var userId = 0;
-        ExecuteRestQuery(serverURL+"ChatWindow/AddMessage?" + userId + ";" + input);
+        ExecuteRestQuery(serverURL+"ChatWindow/AddMessage/" + userId + "/" + input);
+         var input = $("#input").val("");
     });
 
     window.setInterval(loopFunction, 3000);
@@ -29,7 +30,7 @@ $(function () {
         var defer = $.Deferred();
         ExecuteRestQuery(serverURL+"ChatWindow/GetAllMessages")
             .then(function(data){
-                defer.resolve(data);
+                defer.resolve(data.messages);
             });
         return defer.promise();
     }
@@ -37,24 +38,23 @@ $(function () {
 
 
     function RefreshMessages(dataArray){
-        for(var i=1; i<dataArray.length; i++){
-            var selector= "mensaje"+ i.toString();
-            $(selector).innerText=dataArray[i];
+        $("#ChatBox > span")[0].innerHTML="";
+        for(var i=0; i<dataArray.length; i++){
+            $("#ChatBox > span").append(dataArray[i]+"<br>");
         }
+        return;
     }
 
     function ExecuteRestQuery(url) {
         var defer = $.Deferred();
         $.ajax({
             url: url,
-            type: "GET",
-            headers: {
-                "Accept": "application/json;odata=verbose",
-            },
-            success: function (data, textStatus, jqXHR) {
+            dataType: 'JSON',
+            type: 'GET',
+            success: function (data) {
                 defer.resolve(data);
             },
-            error: function (jqXHR, textStatus, errorThrown) {
+            error: function (jqXHR) {
                 defer.reject(jqXHR);
             }
         });
