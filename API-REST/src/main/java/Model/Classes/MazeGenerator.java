@@ -1,9 +1,6 @@
 package Model.Classes;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class MazeGenerator {
     private final int x;
@@ -123,11 +120,31 @@ public class MazeGenerator {
         players.add(p1);
         players.add(p2);
         Game newGame =  new Game(players);
-        newGame.Move('N', p1);
-        newGame.Move('W', p1);
-        newGame.Move('E', p1);
-        newGame.Move('S', p2);
-        System.out.println("lets c");
+        Timer timer = new Timer();
+        timer.schedule(new QueueManager(), 0, 30000);
+        while(true) {
+            System.out.println(newGame.Move('N', p1));
+            System.out.println(newGame.Move('W', p1));
+            System.out.println(newGame.Move('E', p1));
+            System.out.println(newGame.Move('S', p1));
+            System.out.println("--------------------");
+            System.out.println(newGame.Move('N', p2));
+            System.out.println(newGame.Move('W', p2));
+            System.out.println(newGame.Move('E', p2));
+            System.out.println(newGame.Move('S', p2));
+            System.out.println("--------------------");
+            System.out.println(newGame.Move('N', p1));
+            System.out.println(newGame.Move('W', p1));
+            System.out.println(newGame.Move('E', p1));
+            System.out.println(newGame.Move('S', p1));
+            System.out.println("--------------------");
+            System.out.println(newGame.Move('N', p2));
+            System.out.println(newGame.Move('W', p2));
+            System.out.println(newGame.Move('E', p2));
+            System.out.println(newGame.Move('S', p2));
+            System.out.println("--------------------");
+        }
+
     }
 
 }

@@ -1,5 +1,6 @@
 package Model.Classes;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -10,9 +11,24 @@ public class Board {
     private int sizeX;
     private List<User> Users;
     private Cell[][] Cells;
-    private List<Cell> Positions;
 
-     public int getId() {
+    public Cell getPlayerPosition(User player) {
+        for (int i=0; i<this.Users.size();i++){
+            if (this.Users.get(i)==player){
+                return Positions.get(i);
+            }
+        }
+        return null;
+    }
+
+    private List<Cell> Positions;
+    private Cell WinningCell;
+
+    public Cell getWinningCell() {
+        return WinningCell;
+    }
+
+    public int getId() {
           return Id;
      }
 
@@ -46,25 +62,29 @@ public class Board {
     public void MoveSouth(User player){
         for (int i=0; i<this.Users.size();i++){
             if (this.Users.get(i)== player);
-             this.Positions.get(i).PosX++;
+            this.Positions.set(i,this.Cells[this.Positions.get(i).PosX][this.Positions.get(i).PosY+1]);
+            //this.Positions.get(i).PosY++;
         }
     }
     public void MoveNorth(User player){
         for (int i=0; i<this.Users.size();i++){
             if (this.Users.get(i)== player);
-            this.Positions.get(i).PosX--;
+            this.Positions.set(i,this.Cells[this.Positions.get(i).PosX][this.Positions.get(i).PosY-1]);
+            //this.Positions.get(i).PosY--;
         }
     }
     public void MoveEast(User player){
         for (int i=0; i<this.Users.size();i++){
             if (this.Users.get(i)== player);
-            this.Positions.get(i).PosY++;
+            this.Positions.set(i,this.Cells[this.Positions.get(i).PosX][this.Positions.get(i).PosX+1]);
+            //this.Positions.get(i).PosX++;
         }
     }
     public void MoveWest(User player){
         for (int i=0; i<this.Users.size();i++){
             if (this.Users.get(i)== player);
-            this.Positions.get(i).PosY--;
+            this.Positions.set(i,this.Cells[this.Positions.get(i).PosX][this.Positions.get(i).PosX-1]);
+            //this.Positions.get(i).PosX--;
         }
     }
      public boolean canMoveWest(int x, int y) {
@@ -106,6 +126,7 @@ public class Board {
           }
           MazeGenerator newMaze =(new MazeGenerator(this.sizeX, this.sizeY));
           this.Cells = new Cell[this.sizeY][this.sizeX];
+          this.Positions= new ArrayList<>();
           newMaze.display();
           this.Cells = newMaze.getCells();
           int finishX; int finishY;
@@ -114,6 +135,7 @@ public class Board {
                finishX= rn.nextInt(this.sizeX );
                finishY= rn.nextInt(this.sizeY );
                this.Cells[finishX][finishY].CellType = 1 ;
+              this.WinningCell=this.Cells[finishX][finishY];
                finishX= rn.nextInt(this.sizeX) ;
                finishY= rn.nextInt(this.sizeY) ;
                this.Cells[finishX][finishY].CellType = 2 ;
@@ -127,6 +149,7 @@ public class Board {
                finishX= rn.nextInt(this.sizeX );
                finishY= rn.nextInt(this.sizeY );
                this.Cells[finishX][finishY].CellType = 1 ;
+               this.WinningCell=this.Cells[finishX][finishY];
                finishX= rn.nextInt(this.sizeX ) ;
                finishY= rn.nextInt(this.sizeY) ;
                this.Cells[finishX][finishY].CellType = 2 ;
@@ -144,6 +167,7 @@ public class Board {
                finishX= rn.nextInt(this.sizeX ) + 1;
                finishY= rn.nextInt(this.sizeY ) + 1;
                this.Cells[finishX][finishY].CellType = 1 ;
+               this.WinningCell=this.Cells[finishX][finishY];
                finishX= rn.nextInt(this.sizeX);
                finishY= rn.nextInt(this.sizeY );
                this.Cells[finishX][finishY].CellType = 2 ;
