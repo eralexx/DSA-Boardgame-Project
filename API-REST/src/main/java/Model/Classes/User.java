@@ -1,6 +1,8 @@
 package Model.Classes;
 
+
 import java.util.List;
+
 
 public class User {
 
@@ -10,11 +12,10 @@ public class User {
      String UserName;
      String Email;
      String Password;
-     int Nivel;
-     int Ataque;
-     int Defensa;
      int Vida;
      List<Item> Items;
+     List<Game> GamesPlayed;
+     List<Game> GamesWon;
 
 
     //End of Attributes
@@ -50,30 +51,6 @@ public class User {
 
     public void setPassword(String password) {
         Password = password;
-    }
-
-    public int getNivel() {
-        return Nivel;
-    }
-
-    public void setNivel(int nivel) {
-        Nivel = nivel;
-    }
-
-    public int getAtaque() {
-        return Ataque;
-    }
-
-    public void setAtaque(int ataque) {
-        Ataque = ataque;
-    }
-
-    public int getDefensa() {
-        return Defensa;
-    }
-
-    public void setDefensa(int defensa) {
-        Defensa = defensa;
     }
 
     public int getVida() {
