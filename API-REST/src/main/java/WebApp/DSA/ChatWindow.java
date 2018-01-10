@@ -1,9 +1,6 @@
 package WebApp.DSA;
 
-import Model.Classes.Chat;
-import Model.Classes.Info;
-import Model.Classes.Message;
-import Model.Classes.User;
+import Model.Classes.*;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -36,13 +33,15 @@ public class ChatWindow {
     @GET
     @Path("/AddMessage/{userId}/{input}")
     @Consumes(MediaType.TEXT_PLAIN)
-    public Response AddMessage(@PathParam("userId") int idUser ,@PathParam("input") String input) {
+    public Response AddMessage(@PathParam("userEmail") String UserEmail ,@PathParam("input") String input) {
         try {
-            User user = new User("NullUser", "NullUser@gmail.com", "null");
+            User user = UserLists.RegisteredUsers.stream()
+                    .filter(item -> item.getEmail().equals(UserEmail))
+                    .findFirst().get();
             User nullUser = new User("NullUser", "NullUser@gmail.com", "null");
-            if (idUser==0) {
+
                 user = nullUser;
-            }
+
             Message newMessage= new Message(input, user);
             Info.chatInfo.AddMessage(newMessage.toString());
             return Response.ok() //200

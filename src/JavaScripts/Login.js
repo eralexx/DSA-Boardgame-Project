@@ -6,7 +6,16 @@ $(function () {
         var email = $("#email").val();
         var password = $("#password").val();
         if (email != "" && password != ""){
-            ExecuteRestQuery(serverURL+"UserManagement?"+email+";"+password);
+            ExecuteRestQuery(serverURL+"UserManagement/Login/"+email+"/"+password)
+            .then(function(data){
+                   if (data==0){
+                   localStorage.setItem("MazeGameEmail", email);
+                   window.location.href=localhost+"/Game/GameWindow.html";
+                   }
+                   else{
+                   alert("Username or password incorrect.");
+                   }
+            });
         }
         else{
         alert("Please fill the entire form");
@@ -17,22 +26,20 @@ $(function () {
         window.location.href= localhost+"/Login/Register.html"
     });
 
-    function ExecuteRestQuery(url) {
-        var defer = $.Deferred();
-        $.ajax({
-            url: url,
-            type: "GET",
-            headers: {
-                "Accept": "application/json;odata=verbose",
-            },
-            success: function (data, textStatus, jqXHR) {
-                defer.resolve(data);
-            },
-            error: function (jqXHR, textStatus, errorThrown) {
-                defer.reject(jqXHR);
-            }
-        });
-        return defer.promise();
-    }
+     function ExecuteRestQuery(url) {
+            var defer = $.Deferred();
+            $.ajax({
+                url: url,
+                dataType: 'JSON',
+                type: 'GET',
+                success: function (data) {
+                    defer.resolve(data);
+                },
+                error: function (jqXHR) {
+                    defer.reject(jqXHR);
+                }
+            });
+            return defer.promise();
+        }
 
 });
