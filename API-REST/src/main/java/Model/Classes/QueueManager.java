@@ -14,6 +14,9 @@ public class QueueManager extends TimerTask {
         this.UsersInQueue.add(player);
     }
     public void run(){
+        if (this.UsersInQueue== null){
+            this.UsersInQueue= new ArrayDeque<>();
+        }
         int Nqueue= this.UsersInQueue.size();
         List<User> players = new ArrayList<>();
         switch(Nqueue){
@@ -22,6 +25,7 @@ public class QueueManager extends TimerTask {
                 User p2= this.UsersInQueue.remove();
                 players.add(p1);
                 players.add(p2);
+                Game newGame = new Game(players);
                 break;
             case 3:
                 p1= this.UsersInQueue.remove();
@@ -30,6 +34,7 @@ public class QueueManager extends TimerTask {
                 players.add(p1);
                 players.add(p2);
                 players.add(p3);
+                newGame = new Game(players);
                 break;
             case 4:
                 p1= this.UsersInQueue.remove();
@@ -40,6 +45,7 @@ public class QueueManager extends TimerTask {
                 players.add(p2);
                 players.add(p3);
                 players.add(p4);
+                newGame = new Game(players);
                 break;
         }
         if (Nqueue >4){
@@ -51,8 +57,9 @@ public class QueueManager extends TimerTask {
             players.add(p2);
             players.add(p3);
             players.add(p4);
+            Game newGame = new Game(players);
         }
-        Game newGame = new Game(players);
+
     }
 }
 

@@ -7,15 +7,20 @@ public class Chat {
 
     private List<String> Messages = new ArrayList<>(20);
 
+
     public void AddMessage(String NewMessage) {
         try {
             if (NewMessage != null)
-                Messages.add(NewMessage);
+                if (Messages.size()>22){
+                    ShiftRight( NewMessage );
+                }
+                else {
+                    Messages.add(NewMessage);
+                }
         } catch (Exception ex) {
             throw ex;
         }
     }
-
     public List<String> getMessages() {
         return Messages;
     }
@@ -38,7 +43,6 @@ public class Chat {
         }
     }
     @Override
-
     public String toString() {
         return "Chat [Messages=" + Messages+"]";
     }

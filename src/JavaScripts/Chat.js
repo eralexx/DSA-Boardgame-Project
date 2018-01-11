@@ -18,8 +18,8 @@ $(function () {
 
     $( "#send-btn" ).click(function() {
         var input = $("#input").val();
-        var mail= = localStorage.getItem("MazeGameEmail");
-        ExecuteRestQuery(serverURL+"ChatWindow/AddMessage/" + userId + "/" + input);
+        var mail =  localStorage.getItem("MazeGameEmail");
+        ExecuteRestQuery(serverURL+"ChatWindow/AddMessage/" + mail + "/" + input);
          var input = $("#input").val("");
     });
 

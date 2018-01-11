@@ -1,5 +1,6 @@
 package WebApp.DSA;
 
+import Model.Classes.Information;
 import Model.Classes.User;
 import Model.Classes.UserLists;
 
@@ -11,9 +12,9 @@ import java.util.List;
 
 @Path("/UserManagement")
 public class UserManagement {
-
-    private static List<User> registeredUsers = UserLists.RegisteredUsers;
-    private static List<User> onlineUsers = UserLists.OnlineUsers;
+    static Information info= Information.getInstance();
+    private static List<User> registeredUsers = info.getUserLists().getRegisteredUsers();
+    private static List<User> onlineUsers = info.getUserLists().getOnlineUsers();
 
     @GET
     @Path("/InitUserData")
@@ -73,6 +74,27 @@ public class UserManagement {
             return null;
         }
     }
+
+    @GET
+    @Path("/GetUserInfo/{Email}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response GetUserInfo(@PathParam("Email") String UserEmail) {
+        try {
+            User output = UserLists.RegisteredUsers.stream()
+                    .filter(item -> item.getEmail().equals(UserEmail))
+                    .findFirst().get();
+            return
+            Response.ok() //200
+                    .entity(output)
+                    .header("Access-Control-Allow-Origin", "*")
+                    .header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
+                    .allow("OPTIONS").build();
+        }
+        catch(Exception ex){
+            return null;
+        }
+    }
+
     @GET
     @Path("/Login/{EmailOrUsername}/{Password}")
     @Produces(MediaType.TEXT_PLAIN)
@@ -100,7 +122,7 @@ public class UserManagement {
                     .allow("OPTIONS").build();
         }
     }
-    public  void AddRegisteredUser(User newUser){
+    private void AddRegisteredUser(User newUser){
         if (this.registeredUsers==null){
             this.registeredUsers= new ArrayList<>();
         }
@@ -108,17 +130,17 @@ public class UserManagement {
 
     }
 
-    public boolean IsRegisteredByEmail(String Email){
-        for(int i=0; i<registeredUsers.size(); i++) {
-            if (registeredUsers.get(i).getEmail()==Email){
+    private boolean IsRegisteredByEmail(String Email){
+        for (User registeredUser : registeredUsers) {
+            if (registeredUser.getEmail() == Email) {
                 return true;
             }
         }
         return false;
     }
-    public boolean CheckLogin(String Email, String Password){
-        for(int i=0; i<registeredUsers.size(); i++) {
-            if (registeredUsers.get(i).getEmail().equals(Email) && registeredUsers.get(i).getPassword().equals(Password)){
+    private boolean CheckLogin(String Email, String Password){
+        for (User registeredUser : registeredUsers) {
+            if (registeredUser.getEmail().equals(Email) && registeredUser.getPassword().equals(Password)) {
                 return true;
             }
         }

@@ -1,25 +1,17 @@
 package Model.Classes;
 
-
+import java.util.ArrayList;
 import java.util.List;
-
 
 public class User {
 
-    //Start of Attributes
+    int Id;
+    String UserName;
+    String Email;
+    String Password;
+    List<Game> GamesPlayed=new ArrayList<>();
+    List<Game> GamesWon=new ArrayList<>();
 
-     int Id;
-     String UserName;
-     String Email;
-     String Password;
-     int Vida;
-     List<Item> Items;
-     List<Game> GamesPlayed;
-     List<Game> GamesWon;
-
-
-    //End of Attributes
-    //Start of Getters And Setters
 
     public int getId() {
         return Id;
@@ -53,32 +45,31 @@ public class User {
         Password = password;
     }
 
-    public int getVida() {
-        return Vida;
+    public List<Game> getGamesPlayed() {
+        return GamesPlayed;
     }
 
-    public void setVida(int vida) {
-        Vida = vida;
+    public void setGamesPlayed(List<Game> gamesPlayed) {
+        GamesPlayed = gamesPlayed;
     }
 
-    public List<Item> getItems() {
-        return Items;
+    public List<Game> getGamesWon() {
+        return GamesWon;
     }
 
-    public void setItems(List<Item> items) {
-        Items = items;
+    public void setGamesWon(List<Game> gamesWon) {
+        GamesWon = gamesWon;
     }
 
 
-    //End of Getters And Setters
-    //Start of Constructors
 
-    public User(int Id, String UserName, String Email, String Password, List<Item> Items){
+
+    public User(){}
+    public User(int Id, String UserName, String Email, String Password){
         this.Id=Id;
         this.UserName=UserName;
         this.Email=Email;
         this.Password=Password;
-        this.Items=Items;
     }
     public User(String UserName, String Email, String Password){
         this.UserName=UserName;
@@ -86,5 +77,18 @@ public class User {
         this.Password=Password;
     }
 
+    public User(int id, String userName, String email, String password, List<Game> gamesPlayed, List<Game> gamesWon) {
+        Id = id;
+        UserName = userName;
+        Email = email;
+        Password = password;
+        GamesPlayed = gamesPlayed;
+        GamesWon = gamesWon;
+    }
+
+    @Override
+    public String toString() {
+        return "Username= "+ UserName;
+    }
     //End of Constructors
 }

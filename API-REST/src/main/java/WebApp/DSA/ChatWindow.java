@@ -10,8 +10,7 @@ import javax.ws.rs.core.Response;
 @Path("/ChatWindow")
 public class ChatWindow {
 
-    private Chat chat= Info.chatInfo;
-    private Message MessageTest;
+     Information info= Information.getInstance();
 
     @GET
     @Path("/AddMessageTest")
@@ -31,19 +30,19 @@ public class ChatWindow {
     }
 
     @GET
-    @Path("/AddMessage/{userId}/{input}")
+    @Path("/AddMessage/{userEmail}/{input}")
     @Consumes(MediaType.TEXT_PLAIN)
     public Response AddMessage(@PathParam("userEmail") String UserEmail ,@PathParam("input") String input) {
         try {
             User user = UserLists.RegisteredUsers.stream()
                     .filter(item -> item.getEmail().equals(UserEmail))
                     .findFirst().get();
-            User nullUser = new User("NullUser", "NullUser@gmail.com", "null");
+            //User nullUser = new User("NullUser", "NullUser@gmail.com", "null");
 
-                user = nullUser;
+                //user = nullUser;
 
             Message newMessage= new Message(input, user);
-            Info.chatInfo.AddMessage(newMessage.toString());
+            info.getChat().AddMessage(newMessage.toString());
             return Response.ok() //200
                 .header("Access-Control-Allow-Origin", "*")
                 .header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
@@ -60,7 +59,7 @@ public class ChatWindow {
     public Response GetAllMessages() {
         try {
             return Response.ok() //200
-                .entity(chat)
+                .entity(info.getChat())
                 .header("Access-Control-Allow-Origin", "*")
                 .header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
                 .allow("OPTIONS").build();

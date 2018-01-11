@@ -8,6 +8,63 @@ import java.util.List;
 public class Game {
 
     private int Id;
+
+    public int getId() {
+        return Id;
+    }
+
+    public void setId(int id) {
+        Id = id;
+    }
+
+    public int getnPlayers() {
+        return nPlayers;
+    }
+
+    public void setnPlayers(int nPlayers) {
+        this.nPlayers = nPlayers;
+    }
+
+    public User getPlayerTurn() {
+        return PlayerTurn;
+    }
+
+    public void setPlayerTurn(User playerTurn) {
+        PlayerTurn = playerTurn;
+    }
+
+    public List<User> getPlayers() {
+        return Players;
+    }
+
+    public void setPlayers(List<User> players) {
+        Players = players;
+    }
+
+    public User getWinner() {
+        return Winner;
+    }
+
+    public void setWinner(User winner) {
+        Winner = winner;
+    }
+
+    public String getTimeStamp() {
+        return timeStamp;
+    }
+
+    public void setTimeStamp(String timeStamp) {
+        this.timeStamp = timeStamp;
+    }
+
+    public Model.Classes.Board getBoard() {
+        return Board;
+    }
+
+    public void setBoard(Model.Classes.Board board) {
+        Board = board;
+    }
+
     private int nPlayers;
     private User PlayerTurn;
     private List<User> Players;
