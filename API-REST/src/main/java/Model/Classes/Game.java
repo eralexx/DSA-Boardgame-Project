@@ -1,7 +1,6 @@
 package Model.Classes;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -79,10 +78,10 @@ public class Game {
         this.Board = new Board(Players);
         this.PlayerTurn=this.Players.get(0);
         for(User user: Players){
-            if(user.GamesPlayed==null) {
+            /*if(user.GamesPlayed==null) {
                 user.GamesPlayed = new ArrayList<>();
             }
-            user.GamesPlayed.add(this);
+            user.GamesPlayed.add(this);*/
         }
     }
 
@@ -125,11 +124,11 @@ public class Game {
      Cell CurrentCell=this.Board.getPlayerPosition(this.PlayerTurn); //Esto no se actualiza
      if (EndCell==CurrentCell){
          this.Winner=PlayerTurn;
-         if ( this.PlayerTurn.GamesWon==null){
+         /*if ( this.PlayerTurn.GamesWon==null){
              this.PlayerTurn.GamesWon= new ArrayList<>();
          }
-         this.PlayerTurn.GamesWon.add(this);
-         System.out.println("Player "+this.PlayerTurn.UserName + "has won the game.");
+         this.PlayerTurn.GamesWon.add(this);*/
+         System.out.println("Player "+this.PlayerTurn.getUserName() + "has won the game.");
          return true;
      }
      else {
@@ -162,5 +161,6 @@ public class Game {
             }
         }
     }
+    public Game(){}
 
 }

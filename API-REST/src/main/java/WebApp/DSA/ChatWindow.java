@@ -13,23 +13,6 @@ public class ChatWindow {
      Information info= Information.getInstance();
 
     @GET
-    @Path("/AddMessageTest")
-    @Produces(MediaType.TEXT_PLAIN)
-    @Consumes(MediaType.TEXT_PLAIN)
-    public String AddMessageTest() {
-        try {
-            String input= "Lorem Ipsum";
-            User nullUser = new User("NullUser", "NullUser@gmail.com", "null");
-            Message newMessage= new Message(input, nullUser);
-            Info.chatInfo.AddMessage(newMessage.toString());
-            return "ok";
-        }
-        catch(Exception ex){
-            throw ex;
-        }
-    }
-
-    @GET
     @Path("/AddMessage/{userEmail}/{input}")
     @Consumes(MediaType.TEXT_PLAIN)
     public Response AddMessage(@PathParam("userEmail") String UserEmail ,@PathParam("input") String input) {

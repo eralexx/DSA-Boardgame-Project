@@ -28,8 +28,9 @@ public class UserManagement {
         this.AddRegisteredUser(user2);
         this.AddRegisteredUser(user3);
         this.AddRegisteredUser(user4);
+        System.out.println("Data initialized.");
     }
-    //Endpoints Rest para el logeo, registro y control de sesion de los users
+
     @GET
     @Path("/Register/{Email}/{Username}/{Password}")
     @Produces(MediaType.TEXT_PLAIN)
@@ -54,6 +55,7 @@ public class UserManagement {
     @GET
     @Path("/GetRegisteredUsers")
     @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
     public List<User> GetRegisteredUsers() {
         try {
             return registeredUsers;

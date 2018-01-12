@@ -1,5 +1,6 @@
 package Model.Classes;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Cell {
@@ -8,8 +9,8 @@ public class Cell {
      int PosX;
      int PosY;
      int GeneratorNum;
-     User UserInCell;
-     List<Character> Moves;
+     User UserInCell =  new User();
+     List<Character> Moves =  new ArrayList<>(3);
 
      public Cell(int cellType, int posX, int posY, int generatorNum) {
           CellType = cellType;
@@ -17,9 +18,6 @@ public class Cell {
           PosY = posY;
           GeneratorNum = generatorNum;
      }
-     Item ItemInCell;
-     List<User> UsersVisible;
-
      public int getCellType() {
           return CellType;
      }
@@ -43,4 +41,30 @@ public class Cell {
      public void setPosY(int posY) {
           PosY = posY;
      }
+
+    public int getGeneratorNum() {
+        return GeneratorNum;
+    }
+
+    public void setGeneratorNum(int generatorNum) {
+        GeneratorNum = generatorNum;
+    }
+
+    public List<Character> getMoves() {
+        return Moves;
+    }
+
+    public void setMoves(List<Character> moves) {
+        Moves = moves;
+    }
+
+    public User getUserInCell() {
+        return UserInCell;
+    }
+
+    public void setUserInCell(User userInCell) {
+        UserInCell = userInCell;
+    }
+
+    public Cell(){}
 }

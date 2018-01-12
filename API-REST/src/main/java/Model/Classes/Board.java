@@ -186,5 +186,6 @@ public class Board {
               this.Positions.add(this.Cells[finishX][finishY]);
           }
      }
+     public Board(){}
 }
 

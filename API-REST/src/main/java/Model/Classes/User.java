@@ -5,12 +5,28 @@ import java.util.List;
 
 public class User {
 
-    int Id;
-    String UserName;
-    String Email;
-    String Password;
-    List<Game> GamesPlayed=new ArrayList<>();
-    List<Game> GamesWon=new ArrayList<>();
+    private int Id = 0;
+    private String UserName = "null";
+    private String Email = "null";
+    private String Password = "null";
+    private List<Game> GamesPlayed = new ArrayList<>(10);
+    private List<Game> GamesWon = new ArrayList<>(10);
+
+    public List<Game> getGamesPlayed() {
+        return GamesPlayed;
+    }
+
+    public void setGamesPlayed(List<Game> gamesPlayed) {
+        GamesPlayed = gamesPlayed;
+    }
+
+    public List<Game> getGamesWon() {
+        return GamesWon;
+    }
+
+    public void setGamesWon(List<Game> gamesWon) {
+        GamesWon = gamesWon;
+    }
 
 
     public int getId() {
@@ -45,31 +61,8 @@ public class User {
         Password = password;
     }
 
-    public List<Game> getGamesPlayed() {
-        return GamesPlayed;
-    }
+    public User (){
 
-    public void setGamesPlayed(List<Game> gamesPlayed) {
-        GamesPlayed = gamesPlayed;
-    }
-
-    public List<Game> getGamesWon() {
-        return GamesWon;
-    }
-
-    public void setGamesWon(List<Game> gamesWon) {
-        GamesWon = gamesWon;
-    }
-
-
-
-
-    public User(){}
-    public User(int Id, String UserName, String Email, String Password){
-        this.Id=Id;
-        this.UserName=UserName;
-        this.Email=Email;
-        this.Password=Password;
     }
     public User(String UserName, String Email, String Password){
         this.UserName=UserName;
@@ -77,18 +70,6 @@ public class User {
         this.Password=Password;
     }
 
-    public User(int id, String userName, String email, String password, List<Game> gamesPlayed, List<Game> gamesWon) {
-        Id = id;
-        UserName = userName;
-        Email = email;
-        Password = password;
-        GamesPlayed = gamesPlayed;
-        GamesWon = gamesWon;
-    }
 
-    @Override
-    public String toString() {
-        return "Username= "+ UserName;
-    }
-    //End of Constructors
+
 }

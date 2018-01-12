@@ -42,9 +42,9 @@ public class Chat {
             throw ex;
         }
     }
-    @Override
+    /*@Override
     public String toString() {
         return "Chat [Messages=" + Messages+"]";
-    }
+    }*/
 
 }

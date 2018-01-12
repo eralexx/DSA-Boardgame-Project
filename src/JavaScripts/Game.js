@@ -3,12 +3,13 @@ $(function () {
     var serverURL="http://localhost:8081/rest/";
     var User = {};
     var status = 1;
-    //var audio = new Audio('http://localhost:63342/WebAppDSA/src/Game/Halo%20Reach%20-%2015%20-%20Were%20Not%20Going%20Anywhere.mp3').play()
-       $("audio")[0].play();
+
+    $("audio")[0].play();
+
     var b = jsboard.board({attach:"game", size:"20x30", style:"checkerboard"})
     b.cell("each").style({width:"20px", height:"20px"});
 
-    $( "#menu-btn" ).click(function() {
+    $( "#chat-btn" ).click(function() {
         window.location.href= localhost+"/ChatRoom/ChatRoom.html"
     });
 
@@ -27,6 +28,9 @@ $(function () {
     $( "#stats-btn" ).click(function() {
             window.location.href= localhost+"/Game/Stats.html"
     });
+    $( "#profile-btn" ).click(function() {
+                window.location.href= localhost+"/Game/MyProfile.html"
+        });
 
     $( "#queue-btn" ).click(function() {
             window.location.href= localhost+"/ChatRoom/ChatRoom.html"
