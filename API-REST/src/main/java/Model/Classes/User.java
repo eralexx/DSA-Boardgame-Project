@@ -11,6 +11,7 @@ public class User {
     private String Password = "null";
     private List<Game> GamesPlayed = new ArrayList<>(10);
     private List<Game> GamesWon = new ArrayList<>(10);
+    private String ImagePath ="";
 
     public List<Game> getGamesPlayed() {
         return GamesPlayed;
@@ -59,6 +60,14 @@ public class User {
 
     public void setPassword(String password) {
         Password = password;
+    }
+
+    public String getImagePath() {
+        return ImagePath;
+    }
+
+    public void setImagePath(String imagePath) {
+        ImagePath = imagePath;
     }
 
     public User (){

@@ -7,6 +7,18 @@ $(function() {
      ExecuteRestQuery(serverURL+"UserManagement/GetUserInfo/"+UserEmail)
         .then(function(data){
         User =  data;
+
+        $("#UserName").append(User.userName);
+        $("#Id").append(User.id);
+        $("#Email").append(User.email);
+        $("#Password").append(User.password);
+        if (User.ImagePath==null){
+            $("#imagePlaceholder").append("<img src='http://www.free-icons-download.net/images/anonymous-user-icon-80332.png'>");
+        }
+        else{
+           $("#imagePlaceholder").append("<img src="+User.ImagePath+" alt='Girl in a jacket'>")
+        }
+
         });
 
 function ExecuteRestQuery(url) {
