@@ -1,0 +1,30 @@
+#back-btn{
+    padding-top: 30px;
+    padding: 0.01em 30px;
+}
+#data{
+    padding: 0.01em 100px;
+    display: inline-block;
+    position:absolute;
+    background-color: white;
+    border-radius: 16px;
+    border: 1px solid  !important;
+
+}
+img{
+    background-color: white;
+    border-radius: 16px;
+    border: 3px solid #813609 !important;
+    margin: 0 auto;
+    display: block;
+    position: absolute;
+    height: 400px;
+    width: 400px;
+
+}
+#imagePlaceholder{
+  display: inline-block;
+  padding: 0.01em 16px;
+  height: 400px;
+  width: 400px;
+}

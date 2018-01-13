@@ -1,0 +1,12 @@
+#back-btn{
+    padding-top: 30px;
+    padding: 0.01em 30px;
+}
+#data{
+    padding: 0.01em 100px;
+    display: inline-block;
+    position:absolute;
+    background-color: white;
+    border-radius: 16px;
+    border: 1px solid  !important;
+}

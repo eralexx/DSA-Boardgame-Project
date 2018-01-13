@@ -5,6 +5,15 @@ public class Information {
 
     private Chat chat= new Chat();
     private UserLists userLists = new UserLists();
+    private QueueManager queueManager = new QueueManager();
+
+    public QueueManager getQueueManager() {
+        return queueManager;
+    }
+
+    public void setQueueManager(QueueManager queueManager) {
+        this.queueManager = queueManager;
+    }
 
     public Chat getChat() {
         return chat;

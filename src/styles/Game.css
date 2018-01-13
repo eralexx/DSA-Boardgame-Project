@@ -3,7 +3,7 @@
     vertical-align: top;
     padding: 0.01em 16px;
 }
-img{
+#player img{
     height: 200px;
     width: 200px;
     padding: 0.01em 16px;
@@ -19,7 +19,11 @@ span{
     padding: 20px;
 }
 #game {
-    align: right;
+    border: 3px solid  !important;
+    margin: 0 auto;
+    height: 500px;
+    width: 900px;
     display: inline-block;
-    padding: 0.01em 220px;
+    padding: 0.01em ;
 }
+

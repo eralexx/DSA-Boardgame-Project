@@ -11,9 +11,9 @@ $(function() {
         User = data;
 
         $("#UserName").append(User.userName);
-        $("#Id").append(User.id);
-        $("#Email").append(User.email);
-        $("#Password").append(User.password);
+        $("#GamesPlayed").append(User.gamesPlayed.length);
+        $("#GamesWon").append(User.gamesWon.length);
+        $("#WinRate").append(getWinRate(User.gamesPlayed.length, User.gamesWon.length));
         if (User.ImagePath==null){
             $("#imagePlaceholder").append("<img src='http://www.free-icons-download.net/images/anonymous-user-icon-80332.png'>");
         }
@@ -21,7 +21,13 @@ $(function() {
            $("#imagePlaceholder").append("<img src="+User.ImagePath+" alt='Girl in a jacket'>")
         }
     });
-
+function getWinRate(x, y){
+    if  (x==0){
+        return "No games played yet."
+    }
+    else
+        return (y/x*100);
+}
 function ExecuteRestQuery(url) {
             var defer = $.Deferred();
             $.ajax({

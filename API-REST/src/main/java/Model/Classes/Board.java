@@ -48,7 +48,19 @@ public class Board {
           return Cells;
      }
 
-     public void setCells(Cell[][] cells) {
+    public List<Cell> getPositions() {
+        return Positions;
+    }
+
+    public void setPositions(List<Cell> positions) {
+        Positions = positions;
+    }
+
+    public void setWinningCell(Cell winningCell) {
+        WinningCell = winningCell;
+    }
+
+    public void setCells(Cell[][] cells) {
           Cells = cells;
      }
 
