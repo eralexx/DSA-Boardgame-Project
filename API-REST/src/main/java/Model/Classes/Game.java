@@ -40,11 +40,11 @@ public class Game {
         Players = players;
     }
 
-    public User getWinner() {
+    public String getWinner() {
         return Winner;
     }
 
-    public void setWinner(User winner) {
+    public void setWinner(String winner) {
         Winner = winner;
     }
 
@@ -67,7 +67,7 @@ public class Game {
     private int nPlayers;
     private User PlayerTurn;
     private List<User> Players;
-    private User Winner;
+    private String Winner;
     private String timeStamp ;
     private Board Board;
 
@@ -77,58 +77,52 @@ public class Game {
         this.timeStamp = new SimpleDateFormat("dd/MM/yyyy - HH:mm").format(Calendar.getInstance().getTime());
         this.Board = new Board(Players);
         this.PlayerTurn=this.Players.get(0);
-        for(User user: Players){
-            /*if(user.GamesPlayed==null) {
-                user.GamesPlayed = new ArrayList<>();
-            }
-            user.GamesPlayed.add(this);*/
-        }
     }
 
     public boolean Move(char Direction , User player ){
         boolean moved= false;
-        if (CheckMovementPosible(Direction , player)){
-            while (moved==false) {
-                switch (Direction) {
-                    case 'S':
-                        this.Board.MoveSouth(player);
-                        moved=true;
-                        if (!isGameWon())
-                            NextTurn();
-                        break;
-                    case 'N':
-                        this.Board.MoveNorth(player);
-                        moved=true;
-                        if (!isGameWon())
-                            NextTurn();
-                        break;
-                    case 'E':
-                        this.Board.MoveEast(player);
-                        moved=true;
-                        if (!isGameWon())
-                            NextTurn();
-                        break;
-                    case 'W':
-                        this.Board.MoveWest(player);
-                        moved=true;
-                        if (!isGameWon())
-                            NextTurn();
-                        break;
-                }
+        //if (CheckMovementPosible(Direction , player)){
+        while (moved==false) {
+            switch (Direction) {
+                case 'S':
+                    this.Board.MoveSouth(player);
+                    moved=true;
+                    if (!isGameWon())
+                        NextTurn();
+                    break;
+                case 'N':
+                    this.Board.MoveNorth(player);
+                    moved=true;
+                    if (!isGameWon())
+                        NextTurn();
+                    break;
+                case 'E':
+                    this.Board.MoveEast(player);
+                    moved=true;
+                    if (!isGameWon())
+                        NextTurn();
+                    break;
+                case 'W':
+                    this.Board.MoveWest(player);
+                    moved=true;
+                    if (!isGameWon())
+                        NextTurn();
+                    break;
             }
         }
+        //}
         return moved;
     }
     private boolean isGameWon(){
      Cell EndCell=this.Board.getWinningCell();
      Cell CurrentCell=this.Board.getPlayerPosition(this.PlayerTurn); //Esto no se actualiza
      if (EndCell==CurrentCell){
-         this.Winner=PlayerTurn;
-         /*if ( this.PlayerTurn.GamesWon==null){
-             this.PlayerTurn.GamesWon= new ArrayList<>();
+         this.Winner=PlayerTurn.getEmail();
+         for (User player: this.Players) {
+             player.setGamesPlayed(player.getGamesPlayed()+1);
          }
-         this.PlayerTurn.GamesWon.add(this);*/
-         System.out.println("Player "+this.PlayerTurn.getUserName() + "has won the game.");
+         this.PlayerTurn.setGamesWon( this.PlayerTurn.getGamesWon()+1);
+         System.out.println("Player "+this.PlayerTurn.getUserName() + " has won the game.");
          return true;
      }
      else {
@@ -138,14 +132,14 @@ public class Game {
     private void EndGame(){
 
     }
-    private boolean CheckMovementPosible(char Direction , User player ){
+    /*private boolean CheckMovementPosible(char Direction , User player ){
         if (this.Board.checkPosibleMoves(player) !=null){
             if (this.Board.checkPosibleMoves(player).contains(Direction) && this.PlayerTurn==player){
                 return true;
             }
         }
         return false;
-    }
+    }*/
 
     private void NextTurn(){
         for(int i=0; i< this.Players.size(); i++){

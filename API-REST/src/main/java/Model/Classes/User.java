@@ -1,34 +1,38 @@
 package Model.Classes;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class User {
 
     private int Id = 0;
     private String UserName = "null";
     private String Email = "null";
     private String Password = "null";
-    private List<Game> GamesPlayed = new ArrayList<>(10);
-    private List<Game> GamesWon = new ArrayList<>(10);
-    private String ImagePath ="";
+    private int GamesPlayed = 0;
+    private int GamesWon = 0;
+    private String imagePath ="";
 
-    public List<Game> getGamesPlayed() {
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
+    }
+
+    public int getGamesPlayed() {
         return GamesPlayed;
     }
 
-    public void setGamesPlayed(List<Game> gamesPlayed) {
+    public void setGamesPlayed(int gamesPlayed) {
         GamesPlayed = gamesPlayed;
     }
 
-    public List<Game> getGamesWon() {
+    public int getGamesWon() {
         return GamesWon;
     }
 
-    public void setGamesWon(List<Game> gamesWon) {
+    public void setGamesWon(int gamesWon) {
         GamesWon = gamesWon;
     }
-
 
     public int getId() {
         return Id;
@@ -60,14 +64,6 @@ public class User {
 
     public void setPassword(String password) {
         Password = password;
-    }
-
-    public String getImagePath() {
-        return ImagePath;
-    }
-
-    public void setImagePath(String imagePath) {
-        ImagePath = imagePath;
     }
 
     public User (){

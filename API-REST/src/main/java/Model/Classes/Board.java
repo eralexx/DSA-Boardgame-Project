@@ -64,39 +64,32 @@ public class Board {
           Cells = cells;
      }
 
-     public List<Character> checkPosibleMoves(User player){
-         for (int i=0; i<this.Users.size();i++){
-            if (this.Users.get(i)== player);
-            return Positions.get(i).Moves;
-         }
-         return null;
-     }
     public void MoveSouth(User player){
         for (int i=0; i<this.Users.size();i++){
-            if (this.Users.get(i)== player);
-            this.Positions.set(i,this.Cells[this.Positions.get(i).PosX][this.Positions.get(i).PosY+1]);
-            //this.Positions.get(i).PosY++;
+            if (this.Users.get(i)== player) {
+                this.Positions.set(i, this.Cells[this.Positions.get(i).PosX][this.Positions.get(i).PosY + 1]);
+            }
         }
     }
     public void MoveNorth(User player){
         for (int i=0; i<this.Users.size();i++){
-            if (this.Users.get(i)== player);
-            this.Positions.set(i,this.Cells[this.Positions.get(i).PosX][this.Positions.get(i).PosY-1]);
-            //this.Positions.get(i).PosY--;
+            if (this.Users.get(i)== player) {
+                this.Positions.set(i, this.Cells[this.Positions.get(i).PosX][this.Positions.get(i).PosY - 1]);
+            }
         }
     }
     public void MoveEast(User player){
         for (int i=0; i<this.Users.size();i++){
-            if (this.Users.get(i)== player);
-            this.Positions.set(i,this.Cells[this.Positions.get(i).PosX][this.Positions.get(i).PosX+1]);
-            //this.Positions.get(i).PosX++;
+            if (this.Users.get(i)== player) {
+                this.Positions.set(i, this.Cells[this.Positions.get(i).PosX+1][this.Positions.get(i).PosY]);
+            }
         }
     }
     public void MoveWest(User player){
         for (int i=0; i<this.Users.size();i++){
-            if (this.Users.get(i)== player);
-            this.Positions.set(i,this.Cells[this.Positions.get(i).PosX][this.Positions.get(i).PosX-1]);
-            //this.Positions.get(i).PosX--;
+            if (this.Users.get(i)== player) {
+                this.Positions.set(i, this.Cells[this.Positions.get(i).PosX-1][this.Positions.get(i).PosY]);
+            }
         }
     }
      public boolean canMoveWest(int x, int y) {

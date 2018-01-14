@@ -1,5 +1,6 @@
 package WebApp.DSA;
 
+import Model.Classes.Information;
 import Model.Classes.QueueManager;
 import org.glassfish.grizzly.http.server.HttpServer;
 import org.glassfish.grizzly.http.server.StaticHttpHandler;
@@ -35,8 +36,10 @@ public class Main {
         server.getServerConfiguration().addHttpHandler(staticHttpHandler, "/");
 
         java.util.Timer t = new java.util.Timer();
-        QueueManager QueueSystem= new QueueManager();
-        t.schedule(QueueSystem  , 10000, 10000);
+        Information info= Information.getInstance();
+        QueueManager QueueSystem= info.getQueueManager();
+        QueueSystem.setDelay(10000);
+        t.schedule(QueueSystem  , QueueSystem.getDelay(), QueueSystem.getDelay());
         System.out.println(String.format("Jersey app started with WADL available at "
                 + "%sapplication.wadl\nHit enter to stop it...", BASE_URI));
 

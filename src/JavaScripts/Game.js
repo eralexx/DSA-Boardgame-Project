@@ -1,4 +1,10 @@
 var localGame ={};
+var gettingGame= false;
+localGame.isMyTurn=false;
+localGame.canMoveNorth=false;
+localGame.canMoveSouth=false;
+localGame.canMoveEast=false;
+localGame.canMoveWest=false;
 
 
 $(function () {
@@ -6,9 +12,156 @@ $(function () {
     var serverURL="http://localhost:8081/rest/";
     var User = {};
     var status = 1;
-    var localGame ={};
 
-    getRandomGame()
+    window.setInterval( attemptToGetGame, 5000);
+
+    $(document).keydown(function(e) {
+        switch (e.which) {
+        case 37:
+            if (localGame.isMyTurn){
+               if (localGame.canMoveWest){
+                   ExecuteRestQuery(serverURL+"Game/Move/"+localStorage.getItem("MazeGameEmail")+"/W")
+                   .then(function(data){
+                        console.log("Moving West.");
+                        gettingGame=true;
+                        clearBoard();
+                        localGame.isMyTurn = (User.email == data.playerTurn.email);
+                        var a=-1;
+                        for(var i = 0; i<data.nPlayers; i++){
+                           if (data.players[i].email==User.email)
+                           a=i;
+                        }
+                        if(a>=0){
+                            localGame.canMoveNorth=data.board.positions[a].moves.includes('N');
+                            localGame.canMoveSouth=data.board.positions[a].moves.includes('S');
+                            localGame.canMoveEast=data.board.positions[a].moves.includes('E');
+                            localGame.canMoveWest=data.board.positions[a].moves.includes('W');
+                        }
+
+                        localGame.players= data.players;
+                        localGame.nPlayers= data.nPlayers;
+                        localGame.board = data.board;
+                        localGame.boardSize = data.board.cells.length;
+                        localGame.actualPositions= data.board.positions;
+                        localGame.winningCell =  data.board.winningCell;
+                        printAgainstPlayers();
+                        printPlayingBoard();
+                        console.log("game updated.");
+                        break;
+                   })
+               }
+            }  break;//left arrow key
+
+        case 38:
+            if (localGame.isMyTurn){
+                if (localGame.canMoveNorth){
+                   ExecuteRestQuery(serverURL+"Game/Move/"+localStorage.getItem("MazeGameEmail")+"/N")
+                   .then(function(data){
+                        console.log("Moving North.");
+                        gettingGame=true;
+                        clearBoard();
+                        localGame.isMyTurn = (User.email == data.playerTurn.email);
+                        var a=-1;
+                        for(var i = 0; i<data.nPlayers; i++){
+                           if (data.players[i].email==User.email)
+                           a=i;
+                        }
+                        if(a>=0){
+                            localGame.canMoveNorth=data.board.positions[a].moves.includes('N');
+                            localGame.canMoveSouth=data.board.positions[a].moves.includes('S');
+                            localGame.canMoveEast=data.board.positions[a].moves.includes('E');
+                            localGame.canMoveWest=data.board.positions[a].moves.includes('W');
+                        }
+
+                        localGame.players= data.players;
+                        localGame.nPlayers= data.nPlayers;
+                        localGame.board = data.board;
+                        localGame.boardSize = data.board.cells.length;
+                        localGame.actualPositions= data.board.positions;
+                        localGame.winningCell =  data.board.winningCell;
+                        printAgainstPlayers();
+                        printPlayingBoard();
+                        console.log("game updated.");
+
+                   })
+                }
+            }; break; //up arrow key
+
+        case 39:
+            if (localGame.isMyTurn){
+                if (localGame.canMoveEast){
+                   ExecuteRestQuery(serverURL+"Game/Move/"+localStorage.getItem("MazeGameEmail")+"/E")
+                   .then(function(data){
+                        console.log("Moving East.");
+                        gettingGame=true;
+                        clearBoard();
+                        localGame.isMyTurn = (User.email == data.playerTurn.email);
+                        var a=-1;
+                        for(var i = 0; i<data.nPlayers; i++){
+                           if (data.players[i].email==User.email)
+                           a=i;
+                        }
+                        if(a>=0){
+                            localGame.canMoveNorth=data.board.positions[a].moves.includes('N');
+                            localGame.canMoveSouth=data.board.positions[a].moves.includes('S');
+                            localGame.canMoveEast=data.board.positions[a].moves.includes('E');
+                            localGame.canMoveWest=data.board.positions[a].moves.includes('W');
+                        }
+
+                        localGame.players= data.players;
+                        localGame.nPlayers= data.nPlayers;
+                        localGame.board = data.board;
+                        localGame.boardSize = data.board.cells.length;
+                        localGame.actualPositions= data.board.positions;
+                        localGame.winningCell =  data.board.winningCell;
+                        printAgainstPlayers();
+                        printPlayingBoard();
+                        console.log("game updated.");
+
+                   })
+                }
+            }      break;//right arrow key
+
+        case 40:
+            if (localGame.isMyTurn){
+                if (localGame.canMoveSouth){
+                    ExecuteRestQuery(serverURL+"Game/Move/"+localStorage.getItem("MazeGameEmail")+"/S")
+                    .then(function(data){
+                        console.log("Moving South.");
+
+                        gettingGame=true;
+                        clearBoard();
+                        localGame.isMyTurn = (User.email == data.playerTurn.email);
+                        var a=-1;
+                        for(var i = 0; i<data.nPlayers; i++){
+                           if (data.players[i].email==User.email)
+                           a=i;
+                        }
+                        if(a>=0){
+                            localGame.canMoveNorth=data.board.positions[a].moves.includes('N');
+                            localGame.canMoveSouth=data.board.positions[a].moves.includes('S');
+                            localGame.canMoveEast=data.board.positions[a].moves.includes('E');
+                            localGame.canMoveWest=data.board.positions[a].moves.includes('W');
+                        }
+                        localGame.players= data.players;
+                        localGame.nPlayers= data.nPlayers;
+                        localGame.board = data.board;
+                        localGame.boardSize = data.board.cells.length;
+                        localGame.actualPositions= data.board.positions;
+                        localGame.winningCell =  data.board.winningCell;
+                        printAgainstPlayers();
+                        printPlayingBoard();
+                        console.log("game updated.");
+
+                    })
+                }
+            }
+              break;//bottom arrow key
+
+        }
+    })
+
+    /*getRandomGame()
     .then(function(data){
         localGame.players= data.players;
         localGame.nPlayers= data.nPlayers;
@@ -19,13 +172,19 @@ $(function () {
         printAgainstPlayers();
         printPlayingBoard();
         console.log("Got a random game");
-    })
-
-
-    ExecuteRestQuery(serverURL+"UserManagement/GetUserInfo/"+localStorage.getItem("MazeGameEmail"))
-    .then(function(data){
-    User =  data;
-    });
+    });*/
+    getAllUserInfo();
+    function getAllUserInfo(){
+        ExecuteRestQuery(serverURL+"UserManagement/GetUserInfo/"+localStorage.getItem("MazeGameEmail"))
+        .then(function(data){
+            User = data;
+            $("#player-name")[0].innerText=User.userName;
+            $("#player-wins")[0].innerText=User.gamesWon+" wins";
+            if (User.imagePath!= null && User.imagePath != ""){
+                 $("#playerimage").find("img").attr('src', User.imagePath);
+            }
+        });
+    }
     function getRandomGame(){
     var defer= $.Deferred();
         ExecuteRestQuery(serverURL+"Game/GetRandomGame").then(function(data){
@@ -46,6 +205,7 @@ $(function () {
 
     function JoinQueue(){
         ExecuteRestQuery(serverURL+"Game/JoinQueue/"+localStorage.getItem("MazeGameEmail"));
+        clearBoard();
         $("#game").append("<div id='queueText' style='width:200px; color: red; margin:0 auto;'><h2>In queue...</h2></div>");
     }
 
@@ -73,6 +233,58 @@ $(function () {
         HideNecessaryLines();
         printStartingPlayersPositionsAndMeta();
    }
+    function attemptToGetGame(){
+    if (gettingGame){
+        ExecuteRestQuery(serverURL+"Game/AttemptToGetGame/"+localStorage.getItem("MazeGameEmail"))
+        .then(function(data){
+            clearBoard();
+            if (data.winner==null || data.winner ==""){
+                localGame.isMyTurn = (User.email == data.playerTurn.email);
+                gettingGame=true;
+                var a=-1;
+                for(var i = 0; i<data.nPlayers; i++){
+                   if (data.players[i].email==User.email)
+                   a=i;
+                }
+                if(a>=0){
+                    localGame.canMoveNorth=data.board.positions[a].moves.includes('N');
+                    localGame.canMoveSouth=data.board.positions[a].moves.includes('S');
+                    localGame.canMoveEast=data.board.positions[a].moves.includes('E');
+                    localGame.canMoveWest=data.board.positions[a].moves.includes('W');
+                }
+
+                localGame.players= data.players;
+                localGame.nPlayers= data.nPlayers;
+                localGame.board = data.board;
+                localGame.boardSize = data.board.cells.length;
+                localGame.actualPositions= data.board.positions;
+                localGame.winningCell =  data.board.winningCell;
+                printAgainstPlayers();
+                printPlayingBoard();
+                console.log("Got a LEGIT! game");
+            }
+            else{
+                console.log("Destroyng game... " + data.winner + " won.")
+                gettingGame=false;
+                localGame={};
+                GameOver(data.winner);
+                ExecuteRestQuery(serverURL+"Game/DestroyGame/"+localStorage.getItem("MazeGameEmail"));
+                getAllUserInfo();
+                }
+            });
+        }
+    }
+    function GameOver(winner){
+        if (winner==User.email){
+            $("#game").append("<div id='winnerText' style='width:200px; color: green; margin:0 auto;'><h1>YOU WON</h1></div>");
+        }
+        else{
+            $("#game").append("<div id='loserText' style='width:200px; color: red; margin:0 auto;'><h2>Loser...</h2></div>");
+        }
+    }
+    function clearBoard(){
+        $("#game")[0].innerHTML="";
+    }
 
    function printStartingPlayersPositionsAndMeta(){
          $("#celda"+localGame.winningCell.posX+localGame.winningCell.posY).css("background-image", "url(/WebAppDSA/src/Game/finsih.jpg)");
@@ -81,6 +293,7 @@ $(function () {
             printPlayer(i, localGame.players[i], localGame.actualPositions[i].posX, localGame.actualPositions[i].posY);
          }
     };
+
     function printPlayer(n, player, x, y){
         var imageUrl= "";
         if (player.imagePath==null || player.imagePath ==""){
@@ -89,12 +302,13 @@ $(function () {
         else{
             var imageUrl=player.imagePath;
         }
-        $("#celda"+x+y)[0].innerHTML="<div id='player"+n+"'><img style='width:30px; height:30px;' src='"+imageUrl+"'<p>Player "+n+"<br>"+player.userName+"</></div>";
+        $("#celda"+x+y)[0].innerHTML="<div id='player"+n+"'><img style='width:30px; height:30px;' src='"+imageUrl+"'<p>Player "+(n+1)+"<br>"+player.userName+"</></div>";
              //$("#celda"+x+y).css("background-size", "cover");
              $("#player"+n).css("position", "absolute");
              //$("#player"+n).css("max-height", "100%");
 
     }
+
    function HideNecessaryLines(){
        var cells = localGame.board.cells;
        for(var i=0; i<cells.length; i++){
@@ -134,9 +348,6 @@ $(function () {
     }
     $("audio")[0].play();
 
-    //var b = jsboard.board({attach:"game", size:"20x30", style:"checkerboard"})
-    //b.cell("each").style({width:"20px", height:"20px"});
-
     $( "#chat-btn" ).click(function() {
         window.location.href= localhost+"/ChatRoom/ChatRoom.html"
     });
@@ -161,7 +372,9 @@ $(function () {
         });
 
     $( "#queue-btn" ).click(function() {
+           localGame={};
            JoinQueue();
+           gettingGame = true;
     });
 
     $( "#exit-btn" ).click(function() {

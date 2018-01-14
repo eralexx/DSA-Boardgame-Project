@@ -1,11 +1,23 @@
 package Model.Classes;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Information {
     private static Information ourInstance = new Information();
 
     private Chat chat= new Chat();
     private UserLists userLists = new UserLists();
     private QueueManager queueManager = new QueueManager();
+    private List<Game> gamesFinished =  new ArrayList<>();
+
+    public List<Game> getGamesFinished() {
+        return gamesFinished;
+    }
+
+    public void setGamesFinished(List<Game> gamesFinished) {
+        this.gamesFinished = gamesFinished;
+    }
 
     public QueueManager getQueueManager() {
         return queueManager;

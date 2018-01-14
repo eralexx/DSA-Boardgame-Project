@@ -22,7 +22,7 @@ public class UserManagement {
     public void InitializeSomeData(){
         User user1= new User("Alex", "Alex@hahaha.com", "1234");
         User user2= new User("Daniel", "Daniel@hahaha.com", "1234");
-        User user3= new User("Daniel", "Antonio@hahaha.com", "1234");
+        User user3= new User("Antonio", "Antonio@hahaha.com", "1234");
         User user4= new User("test", "test@test.com", "test");
         this.AddRegisteredUser(user1);
         this.AddRegisteredUser(user2);
@@ -85,17 +85,59 @@ public class UserManagement {
             User output = UserLists.RegisteredUsers.stream()
                     .filter(item -> item.getEmail().equals(UserEmail))
                     .findFirst().get();
-            return
-            Response.ok() //200
+
+            return   Response.ok() //200
                     .entity(output)
                     .header("Access-Control-Allow-Origin", "*")
                     .header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
                     .allow("OPTIONS").build();
         }
         catch(Exception ex){
+            throw ex;
+        }
+    }
+    @GET
+    @Path("/ChangePassword/{Email}/{Password}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response ChangePassword(@PathParam("Email") String UserEmail, @PathParam("Password") String Password) {
+        try {
+            User user = UserLists.RegisteredUsers.stream()
+                    .filter(item -> item.getEmail().equals(UserEmail))
+                    .findFirst().get();
+            user.setPassword(Password);
+            return
+                    Response.ok() //200
+                            .header("Access-Control-Allow-Origin", "*")
+                            .header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
+                            .allow("OPTIONS").build();
+        }
+        catch(Exception ex){
+            throw ex;
+        }
+    }
+    @POST
+    @Path("/ChangeImage")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response ChangeImage(User userIn) {
+        try {
+            String UserEmail= userIn.getEmail();
+            String ImageSource = userIn.getImagePath();
+            User user = UserLists.RegisteredUsers.stream()
+                    .filter(item -> item.getEmail().equals(UserEmail))
+                    .findFirst().get();
+            user.setImagePath(ImageSource);
+            return
+                    Response.ok() //200
+                            .header("Access-Control-Allow-Origin", "*")
+                            .header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
+                            .allow("OPTIONS").build();
+        }
+        catch(Exception ex){
             return null;
         }
     }
+
 
     @GET
     @Path("/Login/{EmailOrUsername}/{Password}")

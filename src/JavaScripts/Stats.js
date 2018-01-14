@@ -11,9 +11,9 @@ $(function() {
         User = data;
 
         $("#UserName").append(User.userName);
-        $("#GamesPlayed").append(User.gamesPlayed.length);
-        $("#GamesWon").append(User.gamesWon.length);
-        $("#WinRate").append(getWinRate(User.gamesPlayed.length, User.gamesWon.length));
+        $("#GamesPlayed").append(User.gamesPlayed);
+        $("#GamesWon").append(User.gamesWon);
+        $("#WinRate").append(getWinRate(User.gamesPlayed, User.gamesWon));
         if (User.ImagePath==null){
             $("#imagePlaceholder").append("<img src='http://www.free-icons-download.net/images/anonymous-user-icon-80332.png'>");
         }

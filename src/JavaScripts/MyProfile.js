@@ -6,6 +6,28 @@ $(function() {
     $( "#back-btn" ).click(function() {
         window.location.href= localhost+"/Game/GameWindow.html"
     })
+    $( "#pwd-btn" ).click(function() {
+        var x;
+        var pwd=prompt("Please enter your new Password","");
+        if (pwd!=null){
+           ExecuteRestQuery(serverURL+"UserManagement/ChangePassword/"+UserEmail+"/"+pwd);
+           x="Your password is now " + pwd + ".";
+          alert(x);
+       }
+    })
+    $( "#img-btn" ).click(function() {
+       var x;
+       var img=prompt("Please enter your new image path, make sure it is correct.","");
+       if (img!=null){
+          var data={};
+          User.imagePath  =img;
+          data.url= img;
+          ExecutePostRestQuery(serverURL+"UserManagement/ChangeImage", User);
+          x="Your profile picture has been changed.";
+         alert(x);
+      }
+    })
+
      ExecuteRestQuery(serverURL+"UserManagement/GetUserInfo/"+UserEmail)
         .then(function(data){
         User = data;
@@ -37,4 +59,20 @@ function ExecuteRestQuery(url) {
         });
         return defer.promise();
     }
+    function ExecutePostRestQuery(url, info) {
+                var defer = $.Deferred();
+                $.ajax({
+                    url: url,
+                    dataType: 'JSON',
+                    data: info,
+                    type: 'POST',
+                    success: function (data) {
+                        defer.resolve(data);
+                    },
+                    error: function (jqXHR) {
+                        defer.reject(jqXHR);
+                    }
+            });
+            return defer.promise();
+        }
 })
