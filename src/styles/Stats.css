@@ -6,6 +6,26 @@
     padding: 0.01em 100px;
     display: inline-block;
     position:absolute;
+    width: 35%;
+    background-color: white;
+    border-radius: 16px;
+    border: 1px solid  !important;
+}
+#GamesLists{
+    display: inline-block;
+    margin-left: 40%;
+    width: 50%;
+}
+#GamesWonList{
+    padding: 0.01em 100px;
+    background-color: white;
+    border-radius: 16px;
+    border: 1px solid  !important;
+}
+
+#GamesPlayedList{
+    padding: 0.01em 100px;
+
     background-color: white;
     border-radius: 16px;
     border: 1px solid  !important;

@@ -21,6 +21,20 @@ $(function() {
            $("#imagePlaceholder").append("<img src="+User.ImagePath+" alt='Girl in a jacket'>")
         }
     });
+    ExecuteRestTextQuery(serverURL+"UserManagement/GetUserGames/"+UserEmail)
+        .then(function(data){
+            User = data;
+            for(var i=0; i<data.length; i++){
+                $("#GamesPlayedList").append("<h5 style='color: black;'>"+data[i]+"</h5>");
+            }
+        });
+    ExecuteRestTextQuery(serverURL+"UserManagement/GetUserWins/"+UserEmail)
+        .then(function(data){
+            User = data;
+            for(var i=0; i<data.length; i++){
+                $("#GamesWonList").append("<h5 style='color: green;'>"+data[i]+"</h5>");
+            }
+        });
 function getWinRate(x, y){
     if  (x==0){
         return "No games played yet."
@@ -43,4 +57,19 @@ function ExecuteRestQuery(url) {
         });
         return defer.promise();
     }
+    function ExecuteRestTextQuery(url) {
+                var defer = $.Deferred();
+                $.ajax({
+                    url: url,
+                    dataType: 'Text',
+                    type: 'GET',
+                    success: function (data) {
+                        defer.resolve(data.split(';'));
+                    },
+                    error: function (jqXHR) {
+                        defer.reject(jqXHR);
+                    }
+            });
+            return defer.promise();
+        }
 })

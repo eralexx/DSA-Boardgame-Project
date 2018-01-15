@@ -1,5 +1,6 @@
 package WebApp.DSA;
 
+import Model.Classes.Game;
 import Model.Classes.Information;
 import Model.Classes.User;
 import Model.Classes.UserLists;
@@ -9,6 +10,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Path("/UserManagement")
 public class UserManagement {
@@ -20,15 +22,28 @@ public class UserManagement {
     @Path("/InitUserData")
     @Produces(MediaType.APPLICATION_JSON)
     public void InitializeSomeData(){
-        User user1= new User("Alex", "Alex@hahaha.com", "1234");
-        User user2= new User("Daniel", "Daniel@hahaha.com", "1234");
-        User user3= new User("Antonio", "Antonio@hahaha.com", "1234");
-        User user4= new User("test", "test@test.com", "test");
-        this.AddRegisteredUser(user1);
-        this.AddRegisteredUser(user2);
-        this.AddRegisteredUser(user3);
-        this.AddRegisteredUser(user4);
-        System.out.println("Data initialized.");
+        try {
+            User user1 = new User("Alex", "Alex@hahaha.com", "1234");
+            User user2 = new User("Daniel", "Daniel@hahaha.com", "1234");
+            User user3 = new User("Antonio", "Antonio@hahaha.com", "1234");
+            User user4 = new User("test", "test@test.com", "test");
+            this.AddRegisteredUser(user1);
+            this.AddRegisteredUser(user2);
+            this.AddRegisteredUser(user3);
+            this.AddRegisteredUser(user4);
+            List<Game> finishedGames = new ArrayList<>();
+            Game game1 = new Game(this.GetRegisteredUsers());
+            Game game2 = new Game(this.GetRegisteredUsers());
+            finishedGames.add(game2);
+            finishedGames.add(game1);
+            game2.setWinner(user4.getEmail());
+            game1.setWinner(user1.getEmail());
+            this.info.setGamesFinished(finishedGames);
+            System.out.println("Data initialized.");
+        }
+        catch(Exception ex){
+            throw ex;
+        }
     }
 
     @GET
@@ -96,6 +111,56 @@ public class UserManagement {
             throw ex;
         }
     }
+    @GET
+    @Path("/GetUserGames/{Email}")
+    @Produces(MediaType.TEXT_PLAIN)
+    public Response GetUserGames(@PathParam("Email") String UserEmail) {
+        try {
+            User user = UserLists.RegisteredUsers.stream()
+                    .filter(item -> item.getEmail().equals(UserEmail))
+                    .findFirst().get();
+
+            List<Game> games = info.getGamesFinished().stream()
+                    .filter(item -> item.getPlayers().contains(user))
+                    .collect(Collectors.toList());
+            List<String> gamesString= new ArrayList<>();
+            for(Game game : games){
+                gamesString.add(game.toString());
+            }
+            return   Response.ok() //200
+                    .entity(String.join(";", gamesString))
+                    .header("Access-Control-Allow-Origin", "*")
+                    .header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
+                    .allow("OPTIONS").build();
+        }
+        catch(Exception ex){
+            throw ex;
+        }
+    }
+
+    @GET
+    @Path("/GetUserWins/{Email}")
+    @Produces(MediaType.TEXT_PLAIN)
+    public Response GetUserWins(@PathParam("Email") String UserEmail) {
+        try {
+            List<Game> games = info.getGamesFinished().stream()
+                    .filter(item -> item.getWinner().equals(UserEmail))
+                    .collect(Collectors.toList());
+            List<String> gamesString= new ArrayList<>();
+            for(Game game : games){
+                gamesString.add(game.toString());
+            }
+            return   Response.ok() //200
+                    .entity(String.join(";", gamesString))
+                    .header("Access-Control-Allow-Origin", "*")
+                    .header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
+                    .allow("OPTIONS").build();
+        }
+        catch(Exception ex){
+            throw ex;
+        }
+    }
+
     @GET
     @Path("/ChangePassword/{Email}/{Password}")
     @Produces(MediaType.APPLICATION_JSON)

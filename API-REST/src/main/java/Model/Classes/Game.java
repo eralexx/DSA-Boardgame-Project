@@ -155,6 +155,10 @@ public class Game {
             }
         }
     }
+    @Override
+    public String toString() {
+        return ("Date: " + this.timeStamp + ".    Won by: " + this.Winner + ".    " + this.nPlayers+ " players game.");
+    }
     public Game(){}
 
 }
