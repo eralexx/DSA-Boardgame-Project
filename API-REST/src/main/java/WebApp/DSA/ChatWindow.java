@@ -26,7 +26,8 @@ public class ChatWindow {
 
             Message newMessage= new Message(input, user);
             info.getChat().AddMessage(newMessage.toString());
-            return Response.ok() //200
+            return Response.ok()
+                .entity(0)//200
                 .header("Access-Control-Allow-Origin", "*")
                 .header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
                 .allow("OPTIONS").build();

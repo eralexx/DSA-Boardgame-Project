@@ -80,6 +80,7 @@ public class GameManager {
                     .findFirst().get();
             this.info.getQueueManager().UserJoinQueue(user);
             return Response.ok()
+                    .entity(0)
                     .header("Access-Control-Allow-Origin", "*")
                     .header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
                     .allow("OPTIONS").build();
@@ -128,6 +129,7 @@ public class GameManager {
             this.info.getQueueManager().resetGame(user);
 
             return Response.ok()
+                    .entity(0)
                     .header("Access-Control-Allow-Origin", "*")
                     .header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
                     .allow("OPTIONS").build();

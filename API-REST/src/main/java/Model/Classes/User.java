@@ -66,6 +66,16 @@ public class User {
         Password = password;
     }
 
+    public User(int id, String userName, String email, String password, int gamesPlayed, int gamesWon, String imagePath) {
+        Id = id;
+        UserName = userName;
+        Email = email;
+        Password = password;
+        GamesPlayed = gamesPlayed;
+        GamesWon = gamesWon;
+        this.imagePath = imagePath;
+    }
+
     public User (){
 
     }
@@ -74,7 +84,4 @@ public class User {
         this.Email=Email;
         this.Password=Password;
     }
-
-
-
 }

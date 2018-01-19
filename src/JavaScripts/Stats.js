@@ -1,6 +1,6 @@
 $(function() {
     var localhost= window.location.href.split("src")[0]+"src";
-    var serverURL="http://localhost:8081/rest/";
+    var serverURL="http://2.152.165.114:8081/rest/";
     var User = {};
     var UserEmail = localStorage.getItem("MazeGameEmail")
     $( "#back-btn" ).click(function() {

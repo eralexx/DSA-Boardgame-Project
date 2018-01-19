@@ -1,5 +1,5 @@
 $(function () {
-    var serverURL="http://localhost:8081/rest/";
+    var serverURL="http://2.152.165.114:8081/rest/";
     var localhost= window.location.href.split("src")[0]+"src/";
     var User = {};
 

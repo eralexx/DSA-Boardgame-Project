@@ -23,47 +23,90 @@ public class UserManagement {
     @Produces(MediaType.APPLICATION_JSON)
     public void InitializeSomeData(){
         try {
-            User user1 = new User("Alex", "Alex@hahaha.com", "1234");
-            User user2 = new User("Daniel", "Daniel@hahaha.com", "1234");
-            User user3 = new User("Antonio", "Antonio@hahaha.com", "1234");
-            User user4 = new User("test", "test@test.com", "test");
-            this.AddRegisteredUser(user1);
-            this.AddRegisteredUser(user2);
-            this.AddRegisteredUser(user3);
-            this.AddRegisteredUser(user4);
-            List<Game> finishedGames = new ArrayList<>();
-            Game game1 = new Game(this.GetRegisteredUsers());
-            Game game2 = new Game(this.GetRegisteredUsers());
-            finishedGames.add(game2);
-            finishedGames.add(game1);
-            game2.setWinner(user4.getEmail());
-            game1.setWinner(user1.getEmail());
-            this.info.setGamesFinished(finishedGames);
-            System.out.println("Data initialized.");
+            this.InitializeData();
         }
         catch(Exception ex){
             throw ex;
         }
     }
 
+    private void InitializeData() {
+        User user1 = new User("Alex", "Alex@hahaha.com", "1234");
+        User user2 = new User("Daniel", "Daniel@hahaha.com", "1234");
+        User user3 = new User("Antonio", "Antonio@hahaha.com", "1234");
+        User user4 = new User("test", "test@test.com", "test");
+        user1.setGamesPlayed(2);user2.setGamesPlayed(2);user3.setGamesPlayed(2);user4.setGamesPlayed(2);
+        user1.setGamesWon(1);user4.setGamesWon(1);
+        this.AddRegisteredUser(user1);
+        this.AddRegisteredUser(user2);
+        this.AddRegisteredUser(user3);
+        this.AddRegisteredUser(user4);
+        List<Game> finishedGames = new ArrayList<>();
+        Game game1 = new Game(this.GetRegisteredUsers());
+        Game game2 = new Game(this.GetRegisteredUsers());
+        finishedGames.add(game2);
+        finishedGames.add(game1);
+        game2.setWinner(user4.getEmail());
+        game1.setWinner(user1.getEmail());
+        this.info.setGamesFinished(finishedGames);
+        System.out.println("Data initialized.");
+        this.info.setDataInitialized(true);
+    }
+
     @GET
     @Path("/Register/{Email}/{Username}/{Password}")
     @Produces(MediaType.TEXT_PLAIN)
     @Consumes(MediaType.TEXT_PLAIN)
-    public int registerUser(@PathParam("Email") String Email, @PathParam("Username") String Username,@PathParam("Email") String Password) {
+    public Response registerUser(@PathParam("Email") String Email, @PathParam("Username") String Username,@PathParam("Email") String Password) {
         try {
+            if (this.info.isDataInitialized()==false){
+                InitializeData();
+            }
             if (this.IsRegisteredByEmail(Email)){
-                return -1;
+                return Response.ok() //200
+                        .entity(-1)
+                        .header("Access-Control-Allow-Origin", "*")
+                        .header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
+                        .allow("OPTIONS").build();
             }
             else {
                 User newUser= new User(Email, Username, Password);
                 this.AddRegisteredUser(newUser);
                 this.IsRegisteredByEmail(newUser.getEmail());
-                return 0;
+                return Response.ok() //200
+                        .entity(0)
+                        .header("Access-Control-Allow-Origin", "*")
+                        .header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
+                        .allow("OPTIONS").build();
             }
         }
         catch(Exception ex){
-            return -1;
+            return Response.ok() //200
+                    .entity(-1)
+                    .header("Access-Control-Allow-Origin", "*")
+                    .header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
+                    .allow("OPTIONS").build();
+        }
+    }
+
+    @GET
+    @Path("/Test")
+    @Produces(MediaType.TEXT_PLAIN)
+    @Consumes(MediaType.TEXT_PLAIN)
+    public Response test() {
+        try {
+            return Response.ok() //200
+                    .entity(-1)
+                    .header("Access-Control-Allow-Origin", "*")
+                    .header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
+                    .allow("OPTIONS").build();
+        }
+        catch(Exception ex){
+            return Response.ok() //200
+                    .entity(-1)
+                    .header("Access-Control-Allow-Origin", "*")
+                    .header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
+                    .allow("OPTIONS").build();
         }
     }
 
@@ -97,6 +140,9 @@ public class UserManagement {
     @Produces(MediaType.APPLICATION_JSON)
     public Response GetUserInfo(@PathParam("Email") String UserEmail) {
         try {
+            if (this.info.isDataInitialized()==false){
+                InitializeData();
+            }
             User output = UserLists.RegisteredUsers.stream()
                     .filter(item -> item.getEmail().equals(UserEmail))
                     .findFirst().get();
@@ -209,6 +255,9 @@ public class UserManagement {
     @Produces(MediaType.TEXT_PLAIN)
     public Response Login(@PathParam("EmailOrUsername") String EmailOrUsername, @PathParam("Password") String Password) {
         try {
+            if (this.info.isDataInitialized()==false){
+                InitializeData();
+            }
            if (this.CheckLogin(EmailOrUsername, Password)) {
                return Response.ok()
                        .entity(0)
@@ -241,13 +290,14 @@ public class UserManagement {
 
     private boolean IsRegisteredByEmail(String Email){
         for (User registeredUser : registeredUsers) {
-            if (registeredUser.getEmail() == Email) {
+            if (registeredUser.getEmail().equals( Email)) {
                 return true;
             }
         }
         return false;
     }
     private boolean CheckLogin(String Email, String Password){
+
         for (User registeredUser : registeredUsers) {
             if (registeredUser.getEmail().equals(Email) && registeredUser.getPassword().equals(Password)) {
                 return true;

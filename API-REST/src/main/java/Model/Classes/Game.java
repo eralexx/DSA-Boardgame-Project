@@ -7,6 +7,13 @@ import java.util.List;
 public class Game {
 
     private int Id;
+    private int nPlayers;
+    private User PlayerTurn;
+    private List<User> Players;
+    private String Winner;
+    private String timeStamp ;
+    private Board Board;
+
 
     public int getId() {
         return Id;
@@ -64,12 +71,6 @@ public class Game {
         Board = board;
     }
 
-    private int nPlayers;
-    private User PlayerTurn;
-    private List<User> Players;
-    private String Winner;
-    private String timeStamp ;
-    private Board Board;
 
     public Game( List<User> Players){
         this.Players= Players;
@@ -129,9 +130,7 @@ public class Game {
          return false;
      }
     }
-    private void EndGame(){
 
-    }
     /*private boolean CheckMovementPosible(char Direction , User player ){
         if (this.Board.checkPosibleMoves(player) !=null){
             if (this.Board.checkPosibleMoves(player).contains(Direction) && this.PlayerTurn==player){
@@ -159,6 +158,14 @@ public class Game {
     public String toString() {
         return ("Date: " + this.timeStamp + ".    Won by: " + this.Winner + ".    " + this.nPlayers+ " players game.");
     }
+
+    public Game(int id, List<User> players, String winner, String timeStamp) {
+        Id = id;
+        Players = players;
+        Winner = winner;
+        this.timeStamp = timeStamp;
+    }
+
     public Game(){}
 
 }

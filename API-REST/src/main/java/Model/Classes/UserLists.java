@@ -23,4 +23,10 @@ public class UserLists {
     public List<User> getOnlineUsers(){
         return this.OnlineUsers;
     }
+
+    public User getUserById(int idPlayer) {
+        return  RegisteredUsers.stream()
+                .filter(item -> (item.getId()==idPlayer))
+                .findFirst().get();
+    }
 }

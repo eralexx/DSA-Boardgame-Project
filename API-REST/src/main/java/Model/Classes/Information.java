@@ -10,6 +10,15 @@ public class Information {
     private UserLists userLists = new UserLists();
     private QueueManager queueManager = new QueueManager();
     private List<Game> gamesFinished =  new ArrayList<>();
+    private boolean isDataInitialized = false;
+
+    public boolean isDataInitialized() {
+        return isDataInitialized;
+    }
+
+    public void setDataInitialized(boolean dataInitialized) {
+        isDataInitialized = dataInitialized;
+    }
 
     public List<Game> getGamesFinished() {
         return gamesFinished;
