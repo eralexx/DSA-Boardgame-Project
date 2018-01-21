@@ -1,13 +1,13 @@
 package WebApp.DSA;
 
 import Model.Classes.Information;
+import Model.Classes.MySQLAccess;
 import Model.Classes.QueueManager;
 import org.glassfish.grizzly.http.server.HttpServer;
 import org.glassfish.grizzly.http.server.StaticHttpHandler;
 import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory;
 import org.glassfish.jersey.server.ResourceConfig;
 
-import java.io.IOException;
 import java.net.URI;
 
 /**
@@ -30,16 +30,21 @@ public class Main {
         return GrizzlyHttpServerFactory.createHttpServer(URI.create(BASE_URI), rc);
     }
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws Exception {
         final HttpServer server = startServer();
         StaticHttpHandler staticHttpHandler = new StaticHttpHandler("./public/");
         server.getServerConfiguration().addHttpHandler(staticHttpHandler, "/");
 
         java.util.Timer t = new java.util.Timer();
         Information info= Information.getInstance();
+
+        MySQLAccess DB = new MySQLAccess();
+        DB.LoadInfoFromDB();
+
         QueueManager QueueSystem= info.getQueueManager();
         QueueSystem.setDelay(10000);
         t.schedule(QueueSystem  , QueueSystem.getDelay(), QueueSystem.getDelay());
+
         System.out.println(String.format("Jersey app started with WADL available at "
                 + "%sapplication.wadl\nHit enter to stop it...", BASE_URI));
 

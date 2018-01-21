@@ -11,11 +11,13 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 @Path("/Game")
 public class GameManager {
 
     private Information info= Information.getInstance();
+    MySQLAccess DB = new MySQLAccess();
 
     @GET
     @Path("/GetRandomGame")
@@ -26,6 +28,7 @@ public class GameManager {
             asd.add(info.getUserLists().getRegisteredUsers().get(0));
             asd.add(info.getUserLists().getRegisteredUsers().get(1));
             Game sampleGame= new Game(asd);
+            info.getQueueManager().addGame(sampleGame);
 
             return Response.ok() //200
                     .entity(sampleGame)
@@ -72,7 +75,7 @@ public class GameManager {
 
     @GET
     @Path("/JoinQueue/{userEmail}")
-    @Produces(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.TEXT_PLAIN)
     public Response JoinQueue(@PathParam("userEmail") String UserEmail ) {
         try {
             User user = UserLists.RegisteredUsers.stream()
@@ -118,8 +121,9 @@ public class GameManager {
     @GET
     @Path("/DestroyGame/{userEmail}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response DestroyGame(@PathParam("userEmail") String UserEmail ) {
+    public Response DestroyGame(@PathParam("userEmail") String UserEmail ) throws Exception{
         try {
+            TimeUnit.SECONDS.sleep(10);
             User user = UserLists.RegisteredUsers.stream()
                     .filter(item -> item.getEmail().equals(UserEmail))
                     .findFirst().get();
@@ -127,6 +131,7 @@ public class GameManager {
 
             this.info.getGamesFinished().add(finishedGame);
             this.info.getQueueManager().resetGame(user);
+            DB.insertGameIntoDB(finishedGame);
 
             return Response.ok()
                     .entity(0)

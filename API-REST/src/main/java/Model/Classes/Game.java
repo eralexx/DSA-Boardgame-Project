@@ -156,7 +156,7 @@ public class Game {
     }
     @Override
     public String toString() {
-        return ("Date: " + this.timeStamp + ".    Won by: " + this.Winner + ".    " + this.nPlayers+ " players game.");
+        return ( this.timeStamp + ".    Winner: " + this.Winner + ".    " + this.nPlayers+ " players.");
     }
 
     public Game(int id, List<User> players, String winner, String timeStamp) {

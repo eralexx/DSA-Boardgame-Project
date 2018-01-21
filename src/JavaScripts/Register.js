@@ -1,5 +1,5 @@
 $(function () {
-    var serverURL="http://2.152.165.114:8081/rest/";
+    var serverURL="http://2.152.165.114:80/rest/";
     var localhost= window.location.href.split("src")[0]+"src";
     document.body.style.backgroundImage = "url('https://i.pinimg.com/originals/1d/b4/7d/1db47d885bd31d1f96a5bb590f850284.jpg')";
 

@@ -1,9 +1,6 @@
 package WebApp.DSA;
 
-import Model.Classes.Game;
-import Model.Classes.Information;
-import Model.Classes.User;
-import Model.Classes.UserLists;
+import Model.Classes.*;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -17,6 +14,7 @@ public class UserManagement {
     static Information info= Information.getInstance();
     private static List<User> registeredUsers = info.getUserLists().getRegisteredUsers();
     private static List<User> onlineUsers = info.getUserLists().getOnlineUsers();
+    MySQLAccess DB = new MySQLAccess();
 
     @GET
     @Path("/InitUserData")
@@ -59,9 +57,7 @@ public class UserManagement {
     @Consumes(MediaType.TEXT_PLAIN)
     public Response registerUser(@PathParam("Email") String Email, @PathParam("Username") String Username,@PathParam("Email") String Password) {
         try {
-            if (this.info.isDataInitialized()==false){
-                InitializeData();
-            }
+
             if (this.IsRegisteredByEmail(Email)){
                 return Response.ok() //200
                         .entity(-1)
@@ -72,6 +68,9 @@ public class UserManagement {
             else {
                 User newUser= new User(Email, Username, Password);
                 this.AddRegisteredUser(newUser);
+
+                DB.insertUserIntoDB(newUser);
+
                 this.IsRegisteredByEmail(newUser.getEmail());
                 return Response.ok() //200
                         .entity(0)
@@ -96,7 +95,7 @@ public class UserManagement {
     public Response test() {
         try {
             return Response.ok() //200
-                    .entity(-1)
+                    .entity(0)
                     .header("Access-Control-Allow-Origin", "*")
                     .header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
                     .allow("OPTIONS").build();
@@ -140,9 +139,7 @@ public class UserManagement {
     @Produces(MediaType.APPLICATION_JSON)
     public Response GetUserInfo(@PathParam("Email") String UserEmail) {
         try {
-            if (this.info.isDataInitialized()==false){
-                InitializeData();
-            }
+
             User output = UserLists.RegisteredUsers.stream()
                     .filter(item -> item.getEmail().equals(UserEmail))
                     .findFirst().get();
@@ -255,9 +252,7 @@ public class UserManagement {
     @Produces(MediaType.TEXT_PLAIN)
     public Response Login(@PathParam("EmailOrUsername") String EmailOrUsername, @PathParam("Password") String Password) {
         try {
-            if (this.info.isDataInitialized()==false){
-                InitializeData();
-            }
+
            if (this.CheckLogin(EmailOrUsername, Password)) {
                return Response.ok()
                        .entity(0)

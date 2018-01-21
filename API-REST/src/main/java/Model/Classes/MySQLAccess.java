@@ -127,7 +127,7 @@ public class MySQLAccess {
                   int idPlayer= Integer.parseInt(stringId);
                   userList.add(info.getUserLists().getUserById(idPlayer));
                 }
-                newGame =  new Game(id,userList,info.getUserLists().getUserById(id).getEmail(), timeStamp);
+                newGame =  new Game(id,userList,info.getUserLists().getUserById(winnerID).getEmail(), timeStamp);
                 output.add(newGame);
             }
 

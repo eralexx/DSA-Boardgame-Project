@@ -83,5 +83,6 @@ public class User {
         this.UserName=UserName;
         this.Email=Email;
         this.Password=Password;
+        this.imagePath="http://www.free-icons-download.net/images/anonymous-user-icon-80332.png";
     }
 }

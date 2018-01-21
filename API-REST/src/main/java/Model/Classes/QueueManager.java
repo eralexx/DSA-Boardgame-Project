@@ -82,6 +82,9 @@ public class QueueManager extends TimerTask {
             this.games.add(game);
         }
     }
+    public void addGame(Game game){
+        this.games.add(game);
+    }
 
     public void resetGame(User winner) {
         Game game = this.games.stream()

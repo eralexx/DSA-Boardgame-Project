@@ -9,7 +9,7 @@ localGame.canMoveWest=false;
 
 $(function () {
     var localhost= window.location.href.split("src")[0]+"src";
-    var serverURL="http://2.152.165.114:8081/rest/";
+    var serverURL="http://2.152.165.114:80/rest/";
     var User = {};
     var status = 1;
 
