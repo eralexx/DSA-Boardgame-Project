@@ -22,7 +22,7 @@ public class UserManagement {
     @Path("/Register/{Email}/{Username}/{Password}")
     @Produces(MediaType.TEXT_PLAIN)
     @Consumes(MediaType.TEXT_PLAIN)
-    public Response registerUser(@PathParam("Email") String Email, @PathParam("Username") String Username,@PathParam("Email") String Password) {
+    public Response registerUser(@PathParam("Username") String Email, @PathParam("Email") String Username,@PathParam("Email") String Password) {
         try {
 
             if (this.IsRegisteredByEmail(Email)){
