@@ -137,16 +137,19 @@ public class Board {
           int finishX; int finishY;
           Random rn = new Random();
           if (nPlayers==2){
+
                finishX= rn.nextInt(this.sizeX );
-               finishY= rn.nextInt(this.sizeY );
+               finishY= 2;
                this.Cells[finishX][finishY].CellType = 1 ;
               this.WinningCell=this.Cells[finishX][finishY];
+
                finishX= rn.nextInt(this.sizeX) ;
-               finishY= rn.nextInt(this.sizeY) ;
+               finishY= getRandomWithExclusion(rn,0,4,2) ;
                this.Cells[finishX][finishY].CellType = 2 ;
                this.Positions.add(this.Cells[finishX][finishY]);
+              int[] ex ={2,finishY};
                finishX= rn.nextInt(this.sizeX)  ;
-               finishY= rn.nextInt(this.sizeY) ;
+               finishY= getRandomWithExclusion(rn,0,4,ex) ;
                this.Cells[finishX][finishY].CellType = 2 ;
               this.Positions.add(this.Cells[finishX][finishY]);
           }
@@ -155,14 +158,17 @@ public class Board {
                finishY= rn.nextInt(this.sizeY );
                this.Cells[finishX][finishY].CellType = 1 ;
                this.WinningCell=this.Cells[finishX][finishY];
+
                finishX= rn.nextInt(this.sizeX ) ;
                finishY= rn.nextInt(this.sizeY) ;
                this.Cells[finishX][finishY].CellType = 2 ;
               this.Positions.add(this.Cells[finishX][finishY]);
+
                finishX= rn.nextInt(this.sizeX) ;
                finishY= rn.nextInt(this.sizeY) ;
                this.Cells[finishX][finishY].CellType = 2 ;
               this.Positions.add(this.Cells[finishX][finishY]);
+
                finishX= rn.nextInt(this.sizeX) ;
                finishY= rn.nextInt(this.sizeY) ;
                this.Cells[finishX][finishY].CellType = 2 ;
@@ -173,24 +179,38 @@ public class Board {
                finishY= rn.nextInt(this.sizeY ) + 1;
                this.Cells[finishX][finishY].CellType = 1 ;
                this.WinningCell=this.Cells[finishX][finishY];
+
                finishX= rn.nextInt(this.sizeX);
                finishY= rn.nextInt(this.sizeY );
                this.Cells[finishX][finishY].CellType = 2 ;
               this.Positions.add(this.Cells[finishX][finishY]);
+
                finishX= rn.nextInt(this.sizeX ) ;
                finishY= rn.nextInt(this.sizeY) ;
                this.Cells[finishX][finishY].CellType = 2 ;
               this.Positions.add(this.Cells[finishX][finishY]);
+
                finishX= rn.nextInt(this.sizeX ) ;
                finishY= rn.nextInt(this.sizeY );
                this.Cells[finishX][finishY].CellType = 2 ;
               this.Positions.add(this.Cells[finishX][finishY]);
+
                finishX= rn.nextInt(this.sizeX);
                finishY= rn.nextInt(this.sizeY);
                this.Cells[finishX][finishY].CellType = 2 ;
               this.Positions.add(this.Cells[finishX][finishY]);
           }
      }
+    private int getRandomWithExclusion(Random rnd, int start, int end, int... exclude) {
+        int random = start + rnd.nextInt(end - start + 1 - exclude.length);
+        for (int ex : exclude) {
+            if (random < ex) {
+                break;
+            }
+            random++;
+        }
+        return random;
+    }
      public Board(){}
 }
 

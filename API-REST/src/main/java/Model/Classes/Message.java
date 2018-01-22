@@ -38,7 +38,7 @@ public class Message {
     }
 
     public Message(String Content, User User) {
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm:ss");
         LocalDateTime localDate = LocalDateTime.now();
         this.Time = dtf.format(localDate);
         this.Content = Content;

@@ -68,8 +68,6 @@ public class MySQLAccess {
                 System.out.println("winner: " + email);
                 System.out.println("timestamp: " + password);
             }
-
-
         }
         catch(Exception e){
             throw e;
@@ -122,7 +120,7 @@ public class MySQLAccess {
                 int winnerID = resultSet.getInt("winner");
                 String timeStamp = resultSet.getString("timestamp");
                 String[]asd=playerIDs.split(";");
-
+                userList = new ArrayList<>();
                 for(String stringId: asd){
                   int idPlayer= Integer.parseInt(stringId);
                   userList.add(info.getUserLists().getUserById(idPlayer));
@@ -130,7 +128,6 @@ public class MySQLAccess {
                 newGame =  new Game(id,userList,info.getUserLists().getUserById(winnerID).getEmail(), timeStamp);
                 output.add(newGame);
             }
-
             return output;
         }
         catch (Exception e) {
@@ -196,8 +193,25 @@ public class MySQLAccess {
             close();
         }
     }
+    public void updateField(User user, String field, String value) throws Exception{
+        try {
+            connect = DriverManager
+                    .getConnection("jdbc:mysql://localhost/DSA_TEST?"
+                            + "user=root&password=dani2000");
+            statement = connect.createStatement();
+            preparedStatement = connect
+                    .prepareStatement("UPDATE DSA_TEST.users SET "+field+"='"+value+"' WHERE ID="+user.getId());
 
-    public void insertUserIntoDB(User user)throws Exception{
+            preparedStatement.executeUpdate();
+        }
+        catch (Exception e) {
+            throw e;
+        } finally {
+            close();
+        }
+    }
+
+    public int insertUserIntoDB(User user)throws Exception{
         try {
             connect = DriverManager
                     .getConnection("jdbc:mysql://localhost/DSA_TEST?"
@@ -211,6 +225,11 @@ public class MySQLAccess {
             preparedStatement.setString(3,user.getPassword());
             preparedStatement.setString(4,user.getImagePath());
             preparedStatement.executeUpdate();
+
+            statement = connect.createStatement();
+            resultSet = statement
+                    .executeQuery("SELECT id FROM dsa_test.users WHERE email ="+user.getEmail());
+            return resultSet.getInt("id");
         }
          catch (Exception e) {
             throw e;

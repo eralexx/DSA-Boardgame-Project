@@ -45,6 +45,8 @@ public class QueueManager extends TimerTask {
                 players.add(p2);
                 Game game  = new Game(players);
                 this.games.add(game);
+                this.UsersInQueue.remove(p1);
+                this.UsersInQueue.remove(p2);
                 break;
             case 3:
                 p1= this.UsersInQueue.remove();
@@ -55,6 +57,9 @@ public class QueueManager extends TimerTask {
                 players.add(p3);
                 game = new Game(players);
                 this.games.add(game);
+                this.UsersInQueue.remove(p1);
+                this.UsersInQueue.remove(p2);
+                this.UsersInQueue.remove(p3);
                 break;
             case 4:
                 p1= this.UsersInQueue.remove();
@@ -67,6 +72,10 @@ public class QueueManager extends TimerTask {
                 players.add(p4);
                 game = new Game(players);
                 this.games.add(game);
+                this.UsersInQueue.remove(p1);
+                this.UsersInQueue.remove(p2);
+                this.UsersInQueue.remove(p3);
+                this.UsersInQueue.remove(p4);
                 break;
         }
         if (Nqueue >4){
@@ -91,6 +100,10 @@ public class QueueManager extends TimerTask {
                 .filter(item -> item.getPlayers().contains(winner))
                 .findFirst().get();
         this.games.remove(game);
+    }
+
+    public void removeUserFromQueue(User iuser) {
+        this.UsersInQueue.remove(iuser);
     }
 }
 

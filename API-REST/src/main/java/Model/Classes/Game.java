@@ -1,6 +1,7 @@
 package Model.Classes;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -9,7 +10,7 @@ public class Game {
     private int Id;
     private int nPlayers;
     private User PlayerTurn;
-    private List<User> Players;
+    private List<User> Players = new ArrayList<>();
     private String Winner;
     private String timeStamp ;
     private Board Board;
@@ -156,12 +157,13 @@ public class Game {
     }
     @Override
     public String toString() {
-        return ( this.timeStamp + ".    Winner: " + this.Winner + ".    " + this.nPlayers+ " players.");
+        return ( this.timeStamp + "     Winner: " + this.Winner + "   " + this.nPlayers+ " players.\n");
     }
 
     public Game(int id, List<User> players, String winner, String timeStamp) {
         Id = id;
         Players = players;
+        nPlayers=players.size();
         Winner = winner;
         this.timeStamp = timeStamp;
     }

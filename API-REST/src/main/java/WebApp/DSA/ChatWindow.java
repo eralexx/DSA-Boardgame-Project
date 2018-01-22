@@ -20,9 +20,6 @@ public class ChatWindow {
             User user = UserLists.RegisteredUsers.stream()
                     .filter(item -> item.getEmail().equals(UserEmail))
                     .findFirst().get();
-            //User nullUser = new User("NullUser", "NullUser@gmail.com", "null");
-
-                //user = nullUser;
 
             Message newMessage= new Message(input, user);
             info.getChat().AddMessage(newMessage.toString());

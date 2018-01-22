@@ -123,14 +123,20 @@ public class GameManager {
     @Produces(MediaType.APPLICATION_JSON)
     public Response DestroyGame(@PathParam("userEmail") String UserEmail ) throws Exception{
         try {
-            TimeUnit.SECONDS.sleep(10);
+
             User user = UserLists.RegisteredUsers.stream()
                     .filter(item -> item.getEmail().equals(UserEmail))
                     .findFirst().get();
             Game finishedGame =  info.getQueueManager().getGame(user);
+            for(User iuser:finishedGame.getPlayers()){
+                this.info.getQueueManager().removeUserFromQueue(iuser);
 
+            }
+            TimeUnit.SECONDS.sleep(10);
             this.info.getGamesFinished().add(finishedGame);
             this.info.getQueueManager().resetGame(user);
+
+
             DB.insertGameIntoDB(finishedGame);
 
             return Response.ok()
